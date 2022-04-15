@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Text = styled.p`
+export const Text = styled.p`
 	font-family: 'Mulish';
 	font-style: normal;
 	font-weight: 400;
@@ -8,4 +8,3 @@ const Text = styled.p`
 	line-height: 18px;
 	color: #757575;
 `
-export default Text

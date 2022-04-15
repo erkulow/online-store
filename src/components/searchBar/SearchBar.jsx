@@ -1,32 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
 import LogoImg from '../../assets/Logo.png'
-import { GrShop } from 'react-icons/gr'
+import { FaOpencart } from 'react-icons/fa'
 import { AiOutlineBell } from 'react-icons/ai'
 import { AiOutlineUser } from 'react-icons/ai'
 import { AiOutlineSearch } from 'react-icons/ai'
 
-const index = () => {
+export const SearchBar = () => {
 	return (
-		<SearchBlock>
+		<StyledSearchBlock>
 			<Logo>
 				<img src={LogoImg} alt='' />
 			</Logo>
 			<Search>
 				<input type='text' />
 				<button>
-					<AiOutlineSearch color='white' />
+					<AiOutlineSearch fontSize='30px' color='white' />
 				</button>
 			</Search>
 			<Icons>
-				<GrShop fontSize='30px' />
 				<AiOutlineBell fontSize='30px' />
 				<AiOutlineUser fontSize='30px' />
 			</Icons>
-		</SearchBlock>
+		</StyledSearchBlock>
 	)
 }
-const SearchBlock = styled.div`
+const StyledSearchBlock = styled.div`
 	width: 1200px;
 	margin: 0 auto;
 	display: flex;
@@ -56,7 +55,12 @@ const Search = styled.div`
 		background: #7ac751;
 		border-radius: 0px 2px 2px 0px;
 		border: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 `
-const Icons = styled.div``
-export default index
+const Icons = styled.div`
+	display: flex;
+	justify-content: space-around;
+`

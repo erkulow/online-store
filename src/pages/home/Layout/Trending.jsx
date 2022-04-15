@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import Cards from '../../../components/cards/Cards'
-import Title from '../../../components/UI/Title'
+import { Cards } from '../../../components/cards/Cards'
+import { Title } from '../../../components/UI/Title'
 
-const Trending = () => {
+export const Trending = () => {
 	return (
 		<Wrapper>
 			<Title>TENDING</Title>
@@ -29,6 +29,5 @@ const WrapperCards = styled.div`
 	grid-column-gap: 30px;
 	grid-row-gap: 30px;
 	margin: 0 auto;
+	margin-bottom: 100px;
 `
-
-export default Trending

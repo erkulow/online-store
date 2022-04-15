@@ -1,11 +1,7 @@
-import Home from './pages/home/Home'
+import { AppRoutes } from './routes/AppRoutes'
 
 function App() {
-	return (
-		<div className='App'>
-			<Home />
-		</div>
-	)
+	return <AppRoutes />
 }
 
 export default App

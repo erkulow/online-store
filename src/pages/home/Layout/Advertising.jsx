@@ -1,10 +1,10 @@
 import React from 'react'
 import AdImg from '../../../assets/advertising.png'
 import styled from 'styled-components'
-import TitleItem from '../../../components/UI/TitleItem'
-import Text from '../../../components/UI/Text'
+import { TitleItem } from '../../../components/UI/TitleItem'
+import { Text } from '../../../components/UI/Text'
 
-const Advertising = () => {
+export const Advertising = () => {
 	return (
 		<Wrapper>
 			<FirstBlock>
@@ -95,5 +95,3 @@ const PriceBlock = styled.div`
 		margin: 0;
 	}
 `
-
-export default Advertising

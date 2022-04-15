@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const Title = styled.p`
+export const Title = styled.p`
 	font-family: 'Mulish', sans-serif;
 	font-style: normal;
 	font-weight: 700;

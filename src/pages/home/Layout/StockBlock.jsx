@@ -4,8 +4,7 @@ import bus from '../../../assets/bus.png'
 import gif from '../../../assets/gif.png'
 import wallet from '../../../assets/wallet.png'
 import support from '../../../assets/support.png'
-import TitleItem from '../../../components/UI/TitleItem'
-const StockBlock = () => {
+export const StockBlock = () => {
 	return (
 		<Wrapper>
 			<StockCards>
@@ -52,7 +51,7 @@ const Wrapper = styled.div`
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
-	margin-top: 50px;
+	margin-top: 100px;
 `
 const StockCards = styled.div`
 	display: flex;
@@ -75,4 +74,3 @@ const StockCards = styled.div`
 		width: 55px;
 	}
 `
-export default StockBlock

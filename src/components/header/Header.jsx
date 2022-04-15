@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Header = () => {
+export const Header = (props) => {
 	return (
-		<WrapperForHeader>
+		<WrapperForHeader props={props}>
 			<Container>
 				<p>Welcome to our online shop</p>
 				<p>English (USD) | Login or Sign up</p>
@@ -13,7 +13,7 @@ const Header = () => {
 }
 const WrapperForHeader = styled.div`
 	width: 100%;
-	background: #7ac751;
+	background: ${(props) => props.backColor || '#7ac751'};
 	height: auto;
 `
 const Container = styled.header`
@@ -30,6 +30,6 @@ const Container = styled.header`
 		font-size: 16px;
 		line-height: 19px;
 		color: #ffffff;
+		margin: 0;
 	}
 `
-export default Header
