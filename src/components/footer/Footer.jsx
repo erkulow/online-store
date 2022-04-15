@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Logo from '../../assets/Logo.png'
+import Logo from '../../assets/img/Logo.png'
 import { Text } from '../UI/Text'
 import { FaFacebookF } from 'react-icons/fa'
 import { FiTwitter } from 'react-icons/fi'

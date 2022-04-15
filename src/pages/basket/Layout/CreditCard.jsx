@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import wave from '../../../assets/wave.svg'
+import React from 'react'
+import wave from '../../../assets/svg/wave.svg'
 import styled from 'styled-components'
 import { Text } from '../../../components/UI/Text'
 import { TitleItem } from '../../../components/UI/TitleItem'

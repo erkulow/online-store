@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import Logo from '../../assets/Logo.png'
+import Logo from '../../assets/img/Logo.png'
 import { ListItem } from '../../components/UI/ListItem'
 import { Header } from '../../components/header/Header'
 import { Footer } from '../../components/footer/Footer'
 import { Text } from '../../components/UI/Text'
-import { SearchBar } from '../../components/searchBar/SearchBar'
+import { SearchBar } from '../../components/Layout/SearchBar'
 import { NavLink } from '../../components/Layout/NavLink'
 
 const DataAboutWeb = [
@@ -18,11 +18,14 @@ const DataAboutWeb = [
 ]
 
 const About = () => {
+	const logoImgAdvertising = (
+		<img style={{ width: '250px' }} src={Logo} alt='' />
+	)
 	return (
 		<>
 			<Header />
 			<SearchBar />
-			<NavLink />
+			<NavLink logoImgAdvertising={logoImgAdvertising} />
 			<Wrapper>
 				<br />
 				<WrapperTexts>

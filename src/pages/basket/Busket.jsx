@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import Logo from '../../assets/img/Logo.png'
+import card1 from '../../assets/img/card1.png'
 import { Header } from '../../components/header/Header'
 import { NavLink } from '../../components/Layout/NavLink'
-import { SearchBar } from '../../components/searchBar/SearchBar'
+import { SearchBar } from '../../components/Layout/SearchBar'
 import { GiShoppingCart } from 'react-icons/gi'
 import { TitleItem } from '../../components/UI/TitleItem'
 import { AiOutlineDelete } from 'react-icons/ai'
@@ -11,14 +13,15 @@ import { IoIosArrowDroprightCircle } from 'react-icons/io'
 import { ListItem } from '../../components/UI/ListItem'
 import { Text } from '../../components/UI/Text'
 
-import card1 from '../../assets/card1.png'
-
 const Busket = () => {
+	const logoImgAdvertising = (
+		<img style={{ width: '250px' }} src={Logo} alt='' />
+	)
 	return (
 		<>
 			<Header />
 			<SearchBar />
-			<NavLink />
+			<NavLink logoImgAdvertising={logoImgAdvertising} />
 			<WrapperDesk>
 				<DeskHeader>
 					<FlexDiv>

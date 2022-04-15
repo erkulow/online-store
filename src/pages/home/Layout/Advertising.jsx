@@ -1,6 +1,6 @@
 import React from 'react'
-import AdImg from '../../../assets/advertising.png'
 import styled from 'styled-components'
+import AdImg from '../../../assets/img/advertising.png'
 import { TitleItem } from '../../../components/UI/TitleItem'
 import { Text } from '../../../components/UI/Text'
 
@@ -39,6 +39,7 @@ const Wrapper = styled.div`
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-around;
+	margin-top: 50px;
 `
 const FirstBlock = styled.div`
 	width: 550px;

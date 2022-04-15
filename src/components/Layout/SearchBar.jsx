@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import LogoImg from '../../assets/Logo.png'
-import { FaOpencart } from 'react-icons/fa'
 import { AiOutlineBell } from 'react-icons/ai'
 import { AiOutlineUser } from 'react-icons/ai'
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -10,7 +8,9 @@ export const SearchBar = () => {
 	return (
 		<StyledSearchBlock>
 			<Logo>
-				<img src={LogoImg} alt='' />
+				<p>FK</p>
+				{/* <FaOpencart fontSize='150px' color='#555555' /> */}
+				{/* <img src={LogoImg} alt='' /> */}
 			</Logo>
 			<Search>
 				<input type='text' />
@@ -33,7 +33,24 @@ const StyledSearchBlock = styled.div`
 	align-items: center;
 	margin-top: 21px;
 `
-const Logo = styled.div``
+const Logo = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 3px dotted #7ac751;
+	border-radius: 50%;
+	padding: 15px;
+	background: #f7f8fa;
+	p {
+		color: #85b839;
+		font-family: 'Mulish', sans-serif;
+		font-style: normal;
+		font-weight: 700;
+		font-size: 36px;
+		line-height: 45px;
+		margin: 0 auto;
+	}
+`
 const Search = styled.div`
 	width: 500px;
 	height: 45px;

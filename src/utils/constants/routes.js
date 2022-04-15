@@ -3,13 +3,13 @@ export const ROUTES = {
 		path: '/',
 		label: 'HOME',
 	},
-	SHOP: {
-		path: '/shop',
-		label: 'SHOP',
+	BASKET: {
+		path: '/basket',
+		label: 'BASKET',
 	},
-	BLOG: {
-		path: '/blog',
-		label: 'BLOG',
+	AllCOLLECTIONS: {
+		path: '/all-collections',
+		label: 'All COLLECTIONS',
 	},
 	ABOUT: {
 		path: '/about',
@@ -22,15 +22,15 @@ export const ROUTES = {
 }
 export const FOOTER_LINKS = [
 	ROUTES.HOME,
-	ROUTES.SHOP,
-	ROUTES.BLOG,
+	ROUTES.BASKET,
+	ROUTES.AllCOLLECTIONS,
 	ROUTES.ABOUT,
 	ROUTES.CONTACT_US,
 ]
 export const HEADER_LINKS = [
 	ROUTES.HOME,
-	ROUTES.SHOP,
-	ROUTES.BLOG,
+	ROUTES.BASKET,
+	ROUTES.AllCOLLECTIONS,
 	ROUTES.ABOUT,
 	ROUTES.CONTACT_US,
 ]

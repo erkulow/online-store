@@ -6,7 +6,7 @@ import { Title } from '../../../components/UI/Title'
 export const Trending = () => {
 	return (
 		<Wrapper>
-			<Title>TENDING</Title>
+			<Title>TRENDING</Title>
 			<WrapperCards>
 				<Cards />
 			</WrapperCards>

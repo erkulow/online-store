@@ -5,8 +5,9 @@ import Title from '../../../components/UI/Title'
 import { MdAddShoppingCart } from 'react-icons/md'
 import { TitleItem } from '../../../components/UI/TitleItem'
 
-const OurProduct = () => {
+export const OurProduct = () => {
 	const { products } = useSelector((state) => state.product)
+
 	return (
 		<Wrapper>
 			<Title>Our Product</Title>
@@ -112,4 +113,3 @@ const WrapperInfo = styled.div`
 		}
 	}
 `
-export default OurProduct

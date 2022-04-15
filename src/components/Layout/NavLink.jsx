@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AiOutlineAlignRight } from 'react-icons/ai'
 import { FOOTER_LINKS } from '../../utils/constants/routes'
 import { Link } from 'react-router-dom'
 
-export const NavLink = () => {
+export const NavLink = ({ allcollections, logoImgAdvertising }) => {
 	function renderFooterLinks() {
 		const linkList = FOOTER_LINKS.map(({ label, path }) => (
 			<StyledNavLink key={path} to={path}>
@@ -17,10 +16,8 @@ export const NavLink = () => {
 	return (
 		<BackgroundNav>
 			<NavLinkBlock>
-				<AllCollectionBlock>
-					<AiOutlineAlignRight color='white' fontSize='20px' />
-					<p>ALL COLLECTIONS</p>
-				</AllCollectionBlock>
+				{logoImgAdvertising}
+				{allcollections}
 				{renderFooterLinks()}
 			</NavLinkBlock>
 		</BackgroundNav>
@@ -28,9 +25,11 @@ export const NavLink = () => {
 }
 const BackgroundNav = styled.div`
 	width: 100%;
-	height: 60px;
+	height: 70px;
 	background: #f7f8fa;
 	margin-top: 50px;
+	display: flex;
+	align-items: center;
 `
 const NavLinkBlock = styled.div`
 	width: 1200px;
@@ -39,24 +38,7 @@ const NavLinkBlock = styled.div`
 	justify-content: start;
 	align-items: center;
 `
-const AllCollectionBlock = styled.div`
-	width: 250px;
-	height: 60px;
-	background: #7ac751;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	p {
-		font-family: 'Rubik';
-		font-style: normal;
-		font-weight: 400;
-		font-size: 17px;
-		line-height: 17px;
-		color: #fff;
-		margin: 0;
-		padding-left: 5px;
-	}
-`
+
 const StyledNavLink = styled(Link)`
 	list-style: none;
 	margin-left: 75px;
@@ -70,6 +52,7 @@ const StyledNavLink = styled(Link)`
 	cursor: pointer;
 	transition: 0.3s;
 	position: relative;
+
 	&:hover {
 		color: #7ac751;
 	}
@@ -91,4 +74,5 @@ const StyledNavLink = styled(Link)`
 const Nav = styled.ul`
 	display: flex;
 	margin: 0;
+	align-items: center;
 `

@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import BanerImg from '../../../assets/BanerImg.png'
+import BanerImg from '../../../assets/img/BanerImg.png'
 import { Container } from '../../../components/UI/Container'
 import Title from '../../../components/UI/Title'
 
-export const AllCollections = () => {
+export const ContentBaner = () => {
 	return (
 		<Container display={'flex'}>
 			<CollectionsBlock>

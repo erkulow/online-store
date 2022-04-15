@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import bus from '../../../assets/bus.png'
-import gif from '../../../assets/gif.png'
-import wallet from '../../../assets/wallet.png'
-import support from '../../../assets/support.png'
+import bus from '../../../assets/img/bus.png'
+import gif from '../../../assets/img/gif.png'
+import wallet from '../../../assets/img/wallet.png'
+import support from '../../../assets/img/support.png'
 export const StockBlock = () => {
 	return (
 		<Wrapper>
