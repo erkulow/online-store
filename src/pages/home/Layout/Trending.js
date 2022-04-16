@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { TitleItem } from '../UI/TitleItem'
-import card1 from '../../assets/img/card1.png'
-import card2 from '../../assets/img/card2.png'
-import card3 from '../../assets/img/card3.png'
-import card4 from '../../assets/img/card4.png'
-
+import card1 from '../../../assets/img/card1.png'
+import card2 from '../../../assets/img/card2.png'
+import card3 from '../../../assets/img/card3.png'
+import card4 from '../../../assets/img/card4.png'
+import { Title } from '../../../components/UI/Title'
+import { TitleItem } from '../../../components/UI/TitleItem'
 import { MdAddShoppingCart } from 'react-icons/md'
-
 const data = [
 	{
 		id: 1,
@@ -58,33 +57,53 @@ const data = [
 		price: '$180',
 	},
 ]
-
-export const Cards = () => {
+export const Trending = () => {
 	return (
-		<>
-			{data.map((el) => (
-				<Wrapper key={el.id}>
-					<CoverImg>
-						<img src={el.url} alt='' />
-					</CoverImg>
-					<WrapperInfo>
-						<TitleItem>{el.title}</TitleItem>
-						<div>
-							<h6>{el.price}</h6>
-							<button>
-								<MdAddShoppingCart
-									color='white'
-									fontSize='25px'
-								/>
-							</button>
-						</div>
-					</WrapperInfo>
-				</Wrapper>
-			))}
-		</>
+		<Wrapper>
+			<Title>TRENDING</Title>
+			<WrapperCards>
+				{data.map((product) => (
+					<WrapperCard key={product.id}>
+						<CoverImg>
+							<img src={product.url} alt='' />
+						</CoverImg>
+						<WrapperInfo>
+							<TitleItem>{product.title}</TitleItem>
+							<div>
+								<h6>{product.price}</h6>
+								<button>
+									<MdAddShoppingCart
+										color='white'
+										fontSize='25px'
+									/>
+								</button>
+							</div>
+						</WrapperInfo>
+					</WrapperCard>
+				))}
+			</WrapperCards>
+		</Wrapper>
 	)
 }
 const Wrapper = styled.div`
+	width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 100px;
+`
+const WrapperCards = styled.div`
+	padding-top: 50px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	grid-column-gap: 30px;
+	grid-row-gap: 30px;
+	margin: 0 auto;
+	margin-bottom: 100px;
+`
+const WrapperCard = styled.div`
 	width: 260px;
 	height: 380px;
 	h6 {

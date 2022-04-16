@@ -1,41 +1,51 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Header } from '../../components/header/Header'
-import { NavLink } from '../../components/Layout/NavLink'
+import { NavigateLink } from '../../components/Layout/NavigateLink'
 import { SearchBar } from '../../components/Layout/SearchBar'
 import { AiOutlineAlignRight } from 'react-icons/ai'
 import { ContentBaner } from '../home/Layout/ContentBaner'
 import { StockBlock } from '../home/Layout/StockBlock'
 import { Trending } from '../home/Layout/Trending'
 import { Advertising } from '../home/Layout/Advertising'
-import { OurProduct } from '../home/Layout/OurProduct'
 import { Footer } from '../../components/footer/Footer'
-import { BanerImg1 } from '../home/Layout/Baner'
+import { BanerImg1 } from '../../components/UI/Baner'
+import { Products } from './Layout/Products'
+import { Pagination } from '../../components/UI/Pagination'
 import { useDispatch } from 'react-redux'
-import { getData } from '../../store/productSlice'
+import { getAsyncProducts } from '../../store/productSlice'
+import { useSearchParams } from 'react-router-dom'
 
 const Blog = () => {
 	const dispatch = useDispatch()
-	useEffect(() => {
-		dispatch(getData())
-	}, [])
+	const [searchParams, setSearchParams] = useSearchParams()
+
 	const allcollections = (
 		<AllCollectionBlock>
 			<AiOutlineAlignRight color='white' fontSize='20px' />
 			<p>ALL COLLECTIONS</p>
 		</AllCollectionBlock>
 	)
+	const pageChangeHandler = (selectedPage) => {
+		setSearchParams({ page: selectedPage })
+		dispatch(getAsyncProducts(selectedPage))
+	}
+
 	return (
 		<>
 			<Header />
 			<SearchBar />
-			<NavLink allcollections={allcollections} />
+			<NavigateLink allcollections={allcollections} />
 			<ContentBaner />
 			<StockBlock />
 			<Trending />
 			<Advertising />
-			<OurProduct />
 			<BanerImg1 />
+			<Products />
+			<PaginationContainer>
+				<Pagination onPageChange={pageChangeHandler} />
+			</PaginationContainer>
+
 			<Footer />
 		</>
 	)
@@ -57,5 +67,9 @@ const AllCollectionBlock = styled.div`
 		margin: 0;
 		padding-left: 5px;
 	}
+`
+const PaginationContainer = styled.div`
+	display: flex;
+	justify-content: center;
 `
 export default Blog

@@ -6,7 +6,7 @@ import { Header } from '../../components/header/Header'
 import { Footer } from '../../components/footer/Footer'
 import { Text } from '../../components/UI/Text'
 import { SearchBar } from '../../components/Layout/SearchBar'
-import { NavLink } from '../../components/Layout/NavLink'
+import { NavigateLink } from '../../components/Layout/NavigateLink'
 
 const DataAboutWeb = [
 	{ id: 1, title: 'URL', text: 'http://localhost:3000/about' },
@@ -25,7 +25,7 @@ const About = () => {
 		<>
 			<Header />
 			<SearchBar />
-			<NavLink logoImgAdvertising={logoImgAdvertising} />
+			<NavigateLink logoImgAdvertising={logoImgAdvertising} />
 			<Wrapper>
 				<br />
 				<WrapperTexts>

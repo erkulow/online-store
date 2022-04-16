@@ -1,8 +1,8 @@
 import React from 'react'
-import img2 from '../../../assets/cor/img2.jpg'
-import img3 from '../../../assets/cor/img3.jpg'
+import img2 from '../../assets/cor/img2.jpg'
+import img3 from '../../assets/cor/img3.jpg'
 import styled from 'styled-components'
-import Title from '../../../components/UI/Title'
+import Title from './Title'
 
 export const BanerImg1 = () => {
 	return (
@@ -28,6 +28,7 @@ export const BanerImg2 = () => {
 		</>
 	)
 }
+
 const SlideShowContainer = styled.div`
 	width: 1200px;
 	height: auto;

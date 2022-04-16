@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ListItem } from '../../components/UI/ListItem'
 import { createGlobalStyle } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 const GlobalStyle = createGlobalStyle`
@@ -110,7 +109,7 @@ const Container = styled.div`
 		}
 	}
 `
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
 	const navigate = useNavigate()
 	return (
 		<Container id='container'>
@@ -202,3 +201,4 @@ export const NotFoundPage = () => {
 		</Container>
 	)
 }
+export default NotFoundPage

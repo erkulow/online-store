@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FOOTER_LINKS } from '../../utils/constants/routes'
-import { Link } from 'react-router-dom'
-
-export const NavLink = ({ allcollections, logoImgAdvertising }) => {
+import { NOVIGATIONS_LINKS } from '../../utils/constants/routes'
+import { NavLink } from 'react-router-dom'
+export const NavigateLink = ({ allcollections, logoImgAdvertising }) => {
 	function renderFooterLinks() {
-		const linkList = FOOTER_LINKS.map(({ label, path }) => (
+		const linkList = NOVIGATIONS_LINKS.map(({ label, path }) => (
 			<StyledNavLink key={path} to={path}>
 				{label}
 			</StyledNavLink>
@@ -39,7 +38,7 @@ const NavLinkBlock = styled.div`
 	align-items: center;
 `
 
-const StyledNavLink = styled(Link)`
+const StyledNavLink = styled(NavLink)`
 	list-style: none;
 	margin-left: 75px;
 	font-family: 'Rubik';
@@ -52,7 +51,6 @@ const StyledNavLink = styled(Link)`
 	cursor: pointer;
 	transition: 0.3s;
 	position: relative;
-
 	&:hover {
 		color: #7ac751;
 	}

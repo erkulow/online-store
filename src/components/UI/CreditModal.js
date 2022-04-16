@@ -1,22 +1,21 @@
 import React from 'react'
-import wave from '../../../assets/svg/wave.svg'
+import ReactDOM from 'react-dom'
+import wave from '../../assets/svg/wave.svg'
 import styled from 'styled-components'
-import { Text } from '../../../components/UI/Text'
-import { TitleItem } from '../../../components/UI/TitleItem'
-import { Header } from '../../../components/header/Header'
-import { Footer } from '../../../components/footer/Footer'
+import { Text } from '../../components/UI/Text'
+import { TitleItem } from '../../components/UI/TitleItem'
+import { Backdrop } from './Backdrop'
 // Custom Hook
-import { useInput } from '../../../hooks/useInput'
+import { useInput } from '../../hooks/useInput'
 
-const CreditCard = () => {
+export const CreditModal = () => {
 	const name = useInput('')
 	const numberCard = useInput('')
 	const dateCard = useInput('')
 	const securityCode = useInput('')
 
-	return (
+	return ReactDOM.createPortal(
 		<>
-			<Header backColor={'red'} />
 			<Wrapper>
 				<H1>Payment Information</H1>
 				<Container>
@@ -66,7 +65,6 @@ const CreditCard = () => {
 						<FlexDiv>
 							<label htmlFor=''>Card Number</label>
 							<input
-								maxLength={'16'}
 								placeholder='XXXX XXXX XXXX XXXX'
 								value={numberCard.value}
 								onChange={numberCard.value}
@@ -96,11 +94,15 @@ const CreditCard = () => {
 								/>
 							</FlexDiv>
 						</SecretCodeFlex>
+						<FlexDiv>
+							<button>PAY</button>
+						</FlexDiv>
 					</CreditCardForm>
 				</Container>
 			</Wrapper>
-			<Footer />
-		</>
+			<Backdrop />
+		</>,
+		document.getElementById('credit-modal'),
 	)
 }
 const H1 = styled.h1`
@@ -110,13 +112,18 @@ const H1 = styled.h1`
 	font-weight: 700;
 	font-size: 36px;
 	line-height: 45px;
-	color: #555555;
+	color: #fff;
+	position: relative;
+	z-index: 200;
 `
 const Wrapper = styled.div`
 	margin: 0 auto;
-	margin-top: 100px;
 	width: 1100px;
-	margin-bottom: 200px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 200;
 `
 const Container = styled.div`
 	display: flex;
@@ -142,6 +149,24 @@ const FlexDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-top: 5px;
+	button {
+		margin-top: 5px;
+		padding: 15px 0;
+		background: #0099ff;
+		border: none;
+		border-radius: 4px;
+		color: #dcdcdc;
+		font-family: 'Mulish';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 20px;
+		line-height: 20px;
+		cursor: pointer;
+		&:hover {
+			color: #fff;
+			opacity: 0.9;
+		}
+	}
 	label {
 		font-family: 'Rubik';
 		font-style: normal;
@@ -199,4 +224,3 @@ const CardNumber = styled.div`
 		align-items: center;
 	}
 `
-export default CreditCard

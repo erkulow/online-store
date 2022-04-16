@@ -2,26 +2,39 @@ import React from 'react'
 import styled from 'styled-components'
 import Logo from '../../assets/img/Logo.png'
 import card1 from '../../assets/img/card1.png'
-import { Header } from '../../components/header/Header'
-import { NavLink } from '../../components/Layout/NavLink'
-import { SearchBar } from '../../components/Layout/SearchBar'
-import { GiShoppingCart } from 'react-icons/gi'
+import { useDispatch, useSelector } from 'react-redux'
+import { productActions } from '../../store/productSlice'
+import { ListItem } from '../../components/UI/ListItem'
+import { CreditModal } from '../../components/UI/CreditModal'
+import { Text } from '../../components/UI/Text'
 import { TitleItem } from '../../components/UI/TitleItem'
+import { Header } from '../../components/header/Header'
+import { NavigateLink } from '../../components/Layout/NavigateLink'
+import { SearchBar } from '../../components/Layout/SearchBar'
+//Import Icons
+import { GiShoppingCart } from 'react-icons/gi'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { IoIosArrowDroprightCircle } from 'react-icons/io'
-import { ListItem } from '../../components/UI/ListItem'
-import { Text } from '../../components/UI/Text'
+import { FaOpencart } from 'react-icons/fa'
+import { Footer } from '../../components/footer/Footer'
+import { StockBlock } from '../home/Layout/StockBlock'
+import { Advertising } from '../home/Layout/Advertising'
 
 const Busket = () => {
+	const dispatch = useDispatch()
+	const { showModal } = useSelector((state) => state.product)
 	const logoImgAdvertising = (
 		<img style={{ width: '250px' }} src={Logo} alt='' />
 	)
+	const showModalHandler = () => {
+		dispatch(productActions.showModal())
+	}
 	return (
 		<>
 			<Header />
 			<SearchBar />
-			<NavLink logoImgAdvertising={logoImgAdvertising} />
+			<NavigateLink logoImgAdvertising={logoImgAdvertising} />
 			<WrapperDesk>
 				<DeskHeader>
 					<FlexDiv>
@@ -86,11 +99,18 @@ const Busket = () => {
 						<ListItem>Promo-Code</ListItem>
 					</WrapperPromo>
 					<WrapperTotal>
-						<TitleItem>Total:</TitleItem>
-						<TitleItem>1500</TitleItem>
+						<TitleItem>Total :</TitleItem>
+						<TitleItem> 1500</TitleItem>
+						<ButtonCheckout onClick={showModalHandler}>
+							Checkout Order <FaOpencart fontSize='20px' />
+						</ButtonCheckout>
+						{showModal ? <CreditModal /> : ''}
 					</WrapperTotal>
 				</DeskFooter>
 			</WrapperDesk>
+			<StockBlock />
+			<Advertising />
+			<Footer />
 		</>
 	)
 }
@@ -148,16 +168,17 @@ const WrapperCounter = styled.div`
 		color: #7ac751;
 	}
 `
-
 // Footer
 const DeskFooter = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 10px;
+	padding: 5px;
 `
 const WrapperTotal = styled.div`
 	display: flex;
+	align-items: center;
 `
 const WrapperPromo = styled.div`
 	margin-left: 5px;
@@ -180,6 +201,28 @@ const WrapperInput = styled.div`
 		line-height: 120%;
 		letter-spacing: 0.005em;
 		color: #555555;
+	}
+`
+const ButtonCheckout = styled.button`
+	display: flex;
+	width: 130px;
+	justify-content: center;
+	align-items: center;
+	padding: 8px 3px;
+	margin-left: 10px;
+	border-radius: 4px;
+	border: none;
+	background: #7ac751;
+	font-family: 'Rubik', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 120%;
+	letter-spacing: 0.005em;
+	color: #fff;
+	cursor: pointer;
+	&:hover {
+		opacity: 0.9;
 	}
 `
 

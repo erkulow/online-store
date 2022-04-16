@@ -6,11 +6,13 @@ import { FaFacebookF } from 'react-icons/fa'
 import { FiTwitter } from 'react-icons/fi'
 import { AiOutlineInstagram } from 'react-icons/ai'
 import { FaPinterestP } from 'react-icons/fa'
-import { FOOTER_LINKS } from '../../utils/constants/routes'
-import { Link } from 'react-router-dom'
+import { NOVIGATIONS_LINKS } from '../../utils/constants/routes'
+import { NavLink } from 'react-router-dom'
+
+
 export const Footer = () => {
 	function renderFooterLinks() {
-		const linkList = FOOTER_LINKS.map(({ label, path }) => (
+		const linkList = NOVIGATIONS_LINKS.map(({ label, path }) => (
 			<StyledNavLink key={path} to={path}>
 				{label}
 			</StyledNavLink>
@@ -77,7 +79,7 @@ const WrapperAppIcons = styled.div`
 	flex-direction: column;
 `
 
-const StyledNavLink = styled(Link)`
+const StyledNavLink = styled(NavLink)`
 	list-style: none;
 	margin-left: 75px;
 	font-family: 'Rubik';

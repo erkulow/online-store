@@ -19,15 +19,11 @@ export const ROUTES = {
 		path: '/contact-us',
 		label: 'CONTACT US',
 	},
+	NOT_FOUND_PAGE: {
+		path: '*',
+	},
 }
-export const FOOTER_LINKS = [
-	ROUTES.HOME,
-	ROUTES.BASKET,
-	ROUTES.AllCOLLECTIONS,
-	ROUTES.ABOUT,
-	ROUTES.CONTACT_US,
-]
-export const HEADER_LINKS = [
+export const NOVIGATIONS_LINKS = [
 	ROUTES.HOME,
 	ROUTES.BASKET,
 	ROUTES.AllCOLLECTIONS,

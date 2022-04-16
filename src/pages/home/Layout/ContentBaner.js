@@ -1,10 +1,18 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import BanerImg from '../../../assets/img/BanerImg.png'
 import { Container } from '../../../components/UI/Container'
 import Title from '../../../components/UI/Title'
+import {
+	getJeweleryProducts,
+	getMensClothingProduct,
+	getElectronicsProducts,
+	getWomensClothingProduct,
+} from '../../../store/productSlice'
 
 export const ContentBaner = () => {
+	const dispatch = useDispatch()
 	return (
 		<Container display={'flex'}>
 			<CollectionsBlock>
@@ -12,10 +20,10 @@ export const ContentBaner = () => {
 					<li>All</li>
 					<li>New Arrivals</li>
 					<li>Hot Sale</li>
-					<li>Men's Clothing</li>
-					<li>Women's Clothing</li>
-					<li>Electronic</li>
-					<li>Jewelery</li>
+					<li onClick={() => {dispatch(getMensClothingProduct())}}>Men's Clothing</li>
+					<li onClick={() => {dispatch(getWomensClothingProduct())}}>Women's Clothing</li>
+					<li onClick={() => dispatch(getElectronicsProducts())}>Electronic</li>
+					<li onClick={() => dispatch(getJeweleryProducts())}>Jewelery</li>
 					<li>Sofa</li>
 					<li>Mirrors</li>
 					<li>Stools</li>
