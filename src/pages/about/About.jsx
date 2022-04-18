@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+//import IMG
 import Logo from '../../assets/img/Logo.png'
+//Import Components
 import { ListItem } from '../../components/UI/ListItem'
 import { Header } from '../../components/header/Header'
 import { Footer } from '../../components/footer/Footer'
 import { Text } from '../../components/UI/Text'
 import { SearchBar } from '../../components/Layout/SearchBar'
 import { NavigateLink } from '../../components/Layout/NavigateLink'
-
 const DataAboutWeb = [
 	{ id: 1, title: 'URL', text: 'http://localhost:3000/about' },
 	{ id: 2, title: 'Commercial', text: 'yes' },
@@ -16,7 +17,6 @@ const DataAboutWeb = [
 	{ id: 5, title: 'Server location', text: 'Bishkek' },
 	{ id: 6, title: 'Author', text: 'erkulov' },
 ]
-
 const About = () => {
 	const logoImgAdvertising = (
 		<img style={{ width: '250px' }} src={Logo} alt='' />

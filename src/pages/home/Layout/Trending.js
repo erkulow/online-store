@@ -1,13 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+//Import IMG
 import card1 from '../../../assets/img/card1.png'
 import card2 from '../../../assets/img/card2.png'
 import card3 from '../../../assets/img/card3.png'
 import card4 from '../../../assets/img/card4.png'
+//Import Components
 import { Title } from '../../../components/UI/Title'
 import { TitleItem } from '../../../components/UI/TitleItem'
+//Import Icons
 import { MdAddShoppingCart } from 'react-icons/md'
-const data = [
+//-------------------------
+const DUMMY_MEALS = [
 	{
 		id: 1,
 		title: 'Minimal LCD chair',
@@ -62,7 +66,7 @@ export const Trending = () => {
 		<Wrapper>
 			<Title>TRENDING</Title>
 			<WrapperCards>
-				{data.map((product) => (
+				{DUMMY_MEALS.map((product) => (
 					<WrapperCard key={product.id}>
 						<CoverImg>
 							<img src={product.url} alt='' />

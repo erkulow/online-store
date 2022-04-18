@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+//import IMG
 import Logo from '../../assets/img/Logo.png'
 import card1 from '../../assets/img/card1.png'
-import { useDispatch, useSelector } from 'react-redux'
-import { productActions } from '../../store/productSlice'
+//Import Components
 import { ListItem } from '../../components/UI/ListItem'
 import { CreditModal } from '../../components/UI/CreditModal'
 import { Text } from '../../components/UI/Text'
@@ -11,103 +11,96 @@ import { TitleItem } from '../../components/UI/TitleItem'
 import { Header } from '../../components/header/Header'
 import { NavigateLink } from '../../components/Layout/NavigateLink'
 import { SearchBar } from '../../components/Layout/SearchBar'
+import { Footer } from '../../components/footer/Footer'
+import { StockBlock } from '../home/Layout/StockBlock'
+import { Advertising } from '../home/Layout/Advertising'
+//Import Layout Components
+import { ScrollTop } from '../../components/Layout/ScrollTop'
+//Import Custom Hook
+import { useToggle } from '../../hooks/useToggle'
 //Import Icons
 import { GiShoppingCart } from 'react-icons/gi'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { IoIosArrowDroprightCircle } from 'react-icons/io'
 import { FaOpencart } from 'react-icons/fa'
-import { Footer } from '../../components/footer/Footer'
-import { StockBlock } from '../home/Layout/StockBlock'
-import { Advertising } from '../home/Layout/Advertising'
+import { useDispatch, useSelector } from 'react-redux'
+import { productActions } from '../../store/productSlice'
 
 const Busket = () => {
 	const dispatch = useDispatch()
-	const { showModal } = useSelector((state) => state.product)
+	const { basket } = useSelector((state) => state.product)
+	const [showModal, toggleShowModal] = useToggle(false)
+	// const [basketShow, setBasketShow] = useToggle(false)
 	const logoImgAdvertising = (
 		<img style={{ width: '250px' }} src={Logo} alt='' />
 	)
-	const showModalHandler = () => {
-		dispatch(productActions.showModal())
-	}
+	useEffect(() => {
+		const saved = JSON.parse(localStorage.getItem('basket'))
+		dispatch(productActions.getItemLocalStorage(saved))
+		console.log(saved)
+	}, [])
+	console.log(basket)
+
 	return (
 		<>
 			<Header />
+			<ScrollTop />
 			<SearchBar />
 			<NavigateLink logoImgAdvertising={logoImgAdvertising} />
-			<WrapperDesk>
-				<DeskHeader>
-					<FlexDiv>
-						<TitleItem>Basket</TitleItem>
-						<GiShoppingCart fontSize='30' color='#5c5252' />
-					</FlexDiv>
-					<FlexDiv className='deleteBtn'>
-						<TitleItem>Delete everything</TitleItem>
-						<AiOutlineDelete fontSize='30' color='#5c5252' />
-					</FlexDiv>
-				</DeskHeader>
-				<Main>
-					<OrderCard>
-						<AboutFood>
-							<img src={card1} alt='' />
-							<div>
-								<ListItem>Bars</ListItem>
-								<Text>adasdasda</Text>
-							</div>
-						</AboutFood>
-						<WrapperCounter>
-							<p>840c</p>
-							<TiDeleteOutline cursor='pointer' fontSize='35px' />
-						</WrapperCounter>
-					</OrderCard>
-					<OrderCard>
-						<AboutFood>
-							<img src={card1} alt='' />
-							<div>
-								<ListItem>Bars</ListItem>
-								<Text>adasdasda</Text>
-							</div>
-						</AboutFood>
-						<WrapperCounter>
-							<p>840c</p>
-							<TiDeleteOutline cursor='pointer' fontSize='35px' />
-						</WrapperCounter>
-					</OrderCard>
-					<OrderCard>
-						<AboutFood>
-							<img src={card1} alt='' />
-							<div>
-								<ListItem>Bars</ListItem>
-								<Text>adasdasda</Text>
-							</div>
-						</AboutFood>
-						<WrapperCounter>
-							<p>840c</p>
-							<TiDeleteOutline cursor='pointer' fontSize='35px' />
-						</WrapperCounter>
-					</OrderCard>
-				</Main>
-				<DeskFooter>
-					<WrapperPromo>
-						<WrapperInput>
-							<input type='text' />
-							<IoIosArrowDroprightCircle
-								fontSize='30px'
-								color='grey'
-							/>
-						</WrapperInput>
-						<ListItem>Promo-Code</ListItem>
-					</WrapperPromo>
-					<WrapperTotal>
-						<TitleItem>Total :</TitleItem>
-						<TitleItem> 1500</TitleItem>
-						<ButtonCheckout onClick={showModalHandler}>
-							Checkout Order <FaOpencart fontSize='20px' />
-						</ButtonCheckout>
-						{showModal ? <CreditModal /> : ''}
-					</WrapperTotal>
-				</DeskFooter>
-			</WrapperDesk>
+			{basket.map((productInCart) => (
+				<WrapperDesk key={productInCart.id}>
+					<DeskHeader>
+						<FlexDiv>
+							<TitleItem>Basket</TitleItem>
+							<GiShoppingCart fontSize='30' color='#5c5252' />
+						</FlexDiv>
+						<FlexDiv className='deleteBtn'>
+							<TitleItem>Delete everything</TitleItem>
+							<AiOutlineDelete fontSize='30' color='#5c5252' />
+						</FlexDiv>
+					</DeskHeader>
+					<Main>
+						<OrderCard>
+							<AboutFood>
+								<img src={productInCart.image} alt='' />
+								<div>
+									<ListItem>{productInCart.title}</ListItem>
+									<Text>{productInCart.categorie}</Text>
+								</div>
+							</AboutFood>
+							<WrapperCounter>
+								<p>$ {productInCart.price}</p>
+								<AmountProductsDiv>x2</AmountProductsDiv>
+								<TiDeleteOutline
+									cursor='pointer'
+									fontSize='35px'
+								/>
+							</WrapperCounter>
+						</OrderCard>
+					</Main>
+					<DeskFooter>
+						<WrapperPromo>
+							<WrapperInput>
+								<input type='text' />
+								<IoIosArrowDroprightCircle
+									fontSize='30px'
+									color='grey'
+								/>
+							</WrapperInput>
+							<ListItem>Promo-Code</ListItem>
+						</WrapperPromo>
+						<WrapperTotal>
+							<TitleItem>Total:</TitleItem>
+							<TitleItem> $ {productInCart.price}</TitleItem>
+							<ButtonCheckout onClick={toggleShowModal}>
+								Checkout Order <FaOpencart fontSize='20px' />
+							</ButtonCheckout>
+							{showModal ? <CreditModal /> : ''}
+						</WrapperTotal>
+					</DeskFooter>
+				</WrapperDesk>
+			))}
 			<StockBlock />
 			<Advertising />
 			<Footer />
@@ -151,9 +144,23 @@ const AboutFood = styled.div`
 	align-items: center;
 	img {
 		margin-right: 25px;
-		width: 90px;
-		height: 90px;
+		width: 80px;
+		height: 80px;
+		margin: 8px;
 	}
+`
+const AmountProductsDiv = styled.div`
+	border: 1px solid #555555;
+	border-radius: 4px;
+	padding: 5px;
+	margin-right: 5px;
+	font-family: 'Rubik', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 120%;
+	letter-spacing: 0.005em;
+	color: #555555;
 `
 const WrapperCounter = styled.div`
 	display: flex;

@@ -7,8 +7,11 @@ import { TitleItem } from '../../components/UI/TitleItem'
 import { Backdrop } from './Backdrop'
 // Custom Hook
 import { useInput } from '../../hooks/useInput'
+import { useToggle } from '../../hooks/useToggle'
 
 export const CreditModal = () => {
+	const [hideModal, toggleHideModal] = useToggle(false)
+
 	const name = useInput('')
 	const numberCard = useInput('')
 	const dateCard = useInput('')
@@ -16,91 +19,99 @@ export const CreditModal = () => {
 
 	return ReactDOM.createPortal(
 		<>
-			<Wrapper>
-				<H1>Payment Information</H1>
-				<Container>
-					<Card>
-						<HeaderCard>
-							<TitleItem>RSK BANK</TitleItem>
-							<img src='https://img.icons8.com/cute-clipart/55/000000/scale-tool.png' />
-						</HeaderCard>
-						<CardNumber>
-							<div className='WrapperCheep'>
-								<img src='https://img.icons8.com/cotton/34/000000/wifi--v1.png' />
-								<img src='https://img.icons8.com/fluency/55/000000/sim-card-chip.png' />
-							</div>
-							<Text style={{ color: 'black' }}>
-								<b>card number</b>
-							</Text>
-							<TitleItem>{numberCard.value}</TitleItem>
-						</CardNumber>
-						<FooterCard>
-							<div>
-								<Text style={{ color: 'black' }}>
-									<b>cardholder name</b>
-								</Text>
-								<TitleItem>{name.value}</TitleItem>
-							</div>
-							<div>
-								<Text style={{ color: 'black' }}>
-									<b>expiration</b>
-								</Text>
-								<TitleItem>{dateCard.value}</TitleItem>
-							</div>
-						</FooterCard>
-					</Card>
-					<CreditCardForm>
-						<FlexDiv>
-							<label htmlFor=''>Name</label>
-							<input
-								minLength='3'
-								maxLength='20'
-								placeholder='Name...'
-								value={name.value}
-								onChange={name.value}
-								{...name}
-								type='text'
-							/>
-						</FlexDiv>
-						<FlexDiv>
-							<label htmlFor=''>Card Number</label>
-							<input
-								placeholder='XXXX XXXX XXXX XXXX'
-								value={numberCard.value}
-								onChange={numberCard.value}
-								type='number'
-								{...numberCard}
-							/>
-						</FlexDiv>
-						<SecretCodeFlex>
-							<FlexDiv>
-								<label htmlFor=''>Expiration (mm/yy)</label>
-								<input
-									maxLength='4'
-									value={dateCard.value}
-									onChange={dateCard.value}
-									type='number'
-									{...dateCard}
-								/>
-							</FlexDiv>
-							<FlexDiv>
-								<label htmlFor=''>Security Code</label>
-								<input
-									maxLength={'3'}
-									value={securityCode.value}
-									onChange={securityCode.value}
-									type='number'
-									{...securityCode}
-								/>
-							</FlexDiv>
-						</SecretCodeFlex>
-						<FlexDiv>
-							<button>PAY</button>
-						</FlexDiv>
-					</CreditCardForm>
-				</Container>
-			</Wrapper>
-			<Backdrop />
+			{hideModal ? (
+				''
+			) : (
+				<>
+					<Wrapper>
+						<H1>Payment Information</H1>
+						<Container>
+							<Card>
+								<HeaderCard>
+									<TitleItem>RSK BANK</TitleItem>
+									<img src='https://img.icons8.com/cute-clipart/55/000000/scale-tool.png' />
+								</HeaderCard>
+								<CardNumber>
+									<div className='WrapperCheep'>
+										<img src='https://img.icons8.com/cotton/34/000000/wifi--v1.png' />
+										<img src='https://img.icons8.com/fluency/55/000000/sim-card-chip.png' />
+									</div>
+									<Text style={{ color: 'black' }}>
+										<b>card number</b>
+									</Text>
+									<TitleItem>{numberCard.value}</TitleItem>
+								</CardNumber>
+								<FooterCard>
+									<div>
+										<Text style={{ color: 'black' }}>
+											<b>cardholder name</b>
+										</Text>
+										<TitleItem>{name.value}</TitleItem>
+									</div>
+									<div>
+										<Text style={{ color: 'black' }}>
+											<b>expiration</b>
+										</Text>
+										<TitleItem>{dateCard.value}</TitleItem>
+									</div>
+								</FooterCard>
+							</Card>
+							<CreditCardForm>
+								<FlexDiv>
+									<label htmlFor=''>Name</label>
+									<input
+										minLength='3'
+										maxLength='20'
+										placeholder='Name...'
+										value={name.value}
+										onChange={name.value}
+										{...name}
+										type='text'
+									/>
+								</FlexDiv>
+								<FlexDiv>
+									<label htmlFor=''>Card Number</label>
+									<input
+										placeholder='XXXX XXXX XXXX XXXX'
+										value={numberCard.value}
+										onChange={numberCard.value}
+										type='number'
+										{...numberCard}
+									/>
+								</FlexDiv>
+								<SecretCodeFlex>
+									<FlexDiv>
+										<label htmlFor=''>
+											Expiration (mm/yy)
+										</label>
+										<input
+											maxLength='4'
+											value={dateCard.value}
+											onChange={dateCard.value}
+											type='number'
+											{...dateCard}
+										/>
+									</FlexDiv>
+									<FlexDiv>
+										<label htmlFor=''>Security Code</label>
+										<input
+											maxLength={'3'}
+											value={securityCode.value}
+											onChange={securityCode.value}
+											type='number'
+											{...securityCode}
+										/>
+									</FlexDiv>
+								</SecretCodeFlex>
+								<FlexDiv>
+									<button>PAY</button>
+								</FlexDiv>
+							</CreditCardForm>
+						</Container>
+					</Wrapper>
+					<Backdrop toggleHideModal={toggleHideModal} />
+				</>
+			)}
 		</>,
 		document.getElementById('credit-modal'),
 	)

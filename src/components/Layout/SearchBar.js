@@ -1,19 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { AiOutlineBell } from 'react-icons/ai'
 import { AiOutlineUser } from 'react-icons/ai'
 import { AiOutlineSearch } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
 
 export const SearchBar = () => {
+	const { products } = useSelector((state) => state.product)
+
+	const [filteredProducts, setFilteredProducts] = useState(products)
+
+	const filteredHandler = (event) => {
+		let filter = products.filter((product) =>
+			product.title.includes(event.target.value),
+		)
+		setFilteredProducts(filter)
+		console.log(filteredProducts)
+	}
+
 	return (
 		<StyledSearchBlock>
 			<Logo>
 				<p>FK</p>
-				{/* <FaOpencart fontSize='150px' color='#555555' /> */}
-				{/* <img src={LogoImg} alt='' /> */}
 			</Logo>
 			<Search>
-				<input type='text' />
+				<input onChange={filteredHandler} type='text' />
 				<button>
 					<AiOutlineSearch fontSize='30px' color='white' />
 				</button>

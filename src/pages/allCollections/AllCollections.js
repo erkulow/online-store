@@ -1,25 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
+//Import Store
+import { getAsyncProducts } from '../../store/productSlice'
+//Import Components
 import { Header } from '../../components/header/Header'
 import { NavigateLink } from '../../components/Layout/NavigateLink'
 import { SearchBar } from '../../components/Layout/SearchBar'
-import { AiOutlineAlignRight } from 'react-icons/ai'
+import { Footer } from '../../components/footer/Footer'
+import { BanerImg1 } from '../../components/UI/Baner'
+import { Pagination } from '../../components/UI/Pagination'
+//Import Layout Components
+import { Products } from './Layout/Products'
+import { ScrollTop } from '../../components/Layout/ScrollTop'
 import { ContentBaner } from '../home/Layout/ContentBaner'
 import { StockBlock } from '../home/Layout/StockBlock'
 import { Trending } from '../home/Layout/Trending'
 import { Advertising } from '../home/Layout/Advertising'
-import { Footer } from '../../components/footer/Footer'
-import { BanerImg1 } from '../../components/UI/Baner'
-import { Products } from './Layout/Products'
-import { Pagination } from '../../components/UI/Pagination'
-import { useDispatch } from 'react-redux'
-import { getAsyncProducts } from '../../store/productSlice'
-import { useSearchParams } from 'react-router-dom'
+//Import Icons
+import { AiOutlineAlignRight } from 'react-icons/ai'
 
 const Blog = () => {
 	const dispatch = useDispatch()
 	const [searchParams, setSearchParams] = useSearchParams()
-
 	const allcollections = (
 		<AllCollectionBlock>
 			<AiOutlineAlignRight color='white' fontSize='20px' />
@@ -34,6 +38,7 @@ const Blog = () => {
 	return (
 		<>
 			<Header />
+			<ScrollTop />
 			<SearchBar />
 			<NavigateLink allcollections={allcollections} />
 			<ContentBaner />
@@ -45,7 +50,6 @@ const Blog = () => {
 			<PaginationContainer>
 				<Pagination onPageChange={pageChangeHandler} />
 			</PaginationContainer>
-
 			<Footer />
 		</>
 	)

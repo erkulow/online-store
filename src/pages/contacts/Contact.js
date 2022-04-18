@@ -1,4 +1,5 @@
 import React from 'react'
+//Import Components
 import { Footer } from '../../components/footer/Footer'
 import { Header } from '../../components/header/Header'
 import { NavigateLink } from '../../components/Layout/NavigateLink'

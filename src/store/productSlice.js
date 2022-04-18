@@ -1,24 +1,28 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { appFetch } from '../api/appFetch'
 
+// Get All Ptoducts
 export const getAsyncProducts = createAsyncThunk('product/getAsyncProducts',async (page) => {
 		try { return await appFetch({ path: 'products', method: 'GET', params: { limit : 100, page }})}
 		catch (error){ return error.message }
 	},
 )
+// Get Men`s-Clothing Ptoducts
 export const getMensClothingProduct = createAsyncThunk('men`s-clothing/getMensClothingProduct', async (page)=>{
 	try{return await appFetch({path: `products/category/men's clothing`, method: 'GET'})}
 	catch(error){return error.message}
 })
+// Get Jewelery Ptoducts
 export const getJeweleryProducts = createAsyncThunk('jewelery/getJeweleryProducts', async (page)=>{
 	try{return await appFetch({path: 'products/category/jewelery', method: 'GET'})}
 	catch(error){return error.message}
 })
-
+// Get Electronics Ptoducts
 export const getElectronicsProducts = createAsyncThunk('electronics/getElectronicsProducts', async (page)=>{
 	try{return await appFetch({path: 'products/category/electronics', method: 'GET'})}
 	catch(error){return error.message}
 })
+// Get Women`s-Clothing Ptoducts
 export const getWomensClothingProduct = createAsyncThunk('jewelery/getWomensClothingProduct', async (page)=>{
 	try{return await appFetch({path: `products/category/women's clothing`, method: 'GET'})}
 	catch(error){return error.message}
@@ -26,6 +30,7 @@ export const getWomensClothingProduct = createAsyncThunk('jewelery/getWomensClot
 
 const initState = {
 	products: [],
+	basket: [],
 	status: null,
 	error: null,
 	isLoading: false,
@@ -34,13 +39,18 @@ const initState = {
 const productSlice = createSlice({
 	name: 'product',
 	initialState: initState,
-	reducers:{
-		showModal(state) {
-			state.showModal = true
+	reducers: {
+		addToBasket(state, action){
+			state.products.map((el)=>{
+				if(action.payload === el.id){
+					state.basket.push(el)
+				}
+			})
 		},
-		hideModal(state) {
-			state.showModal = false
-		},
+		getItemLocalStorage(state,action){
+			console.log(action.payload);
+			state.basket = action.payload
+		}
 	},
 	extraReducers: {
 		[getAsyncProducts.pending]: (state) => { state.isLoading = true },
@@ -50,8 +60,8 @@ const productSlice = createSlice({
 		[getWomensClothingProduct.pending]: (state) => { state.isLoading = true },
 		// -----------------------------------------------------------------
 		[getAsyncProducts.fulfilled]: (state, { payload }) => {
-			state.status = 'Success'
 			state.products = payload
+			state.status = 'Success'
 			state.isLoading = false
 		},
 		[getMensClothingProduct.fulfilled]: (state, { payload }) => {
@@ -81,10 +91,6 @@ const productSlice = createSlice({
 		[getMensClothingProduct.rejected]: (state) => { state.error = 'Error' },
 		[getElectronicsProducts.rejected]: (state) => { state.error = 'Error' },
 		[getWomensClothingProduct.rejected]: (state) => { state.error = 'Error' },
-
-
-
-
 	},
 })
 export const productActions = productSlice.actions
