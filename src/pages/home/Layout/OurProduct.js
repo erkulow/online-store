@@ -1,27 +1,35 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Title from '../../../components/UI/Title'
 import { MdAddShoppingCart } from 'react-icons/md'
 import { TitleItem } from '../../../components/UI/TitleItem'
+import { productActions } from '../../../store/productSlice'
 
 export const OurProduct = () => {
+	const dispatch = useDispatch()
 	const { products } = useSelector((state) => state.product)
-
+	const addBaskethandler = (item) => {
+		dispatch(productActions.addToBasket(item))
+	}
 	return (
 		<Wrapper>
 			<Title>Our Product</Title>
 			<WrapperCards>
-				{products.map((el) => (
-					<Card key={el.id}>
+				{products.map((apiProduct) => (
+					<Card key={apiProduct.id}>
 						<CoverImg>
-							<img src={el.image} alt='' />
+							<img src={apiProduct.image} alt='' />
 						</CoverImg>
 						<WrapperInfo>
-							<TitleItem>{el.category}</TitleItem>
+							<TitleItem>{apiProduct.category}</TitleItem>
 							<div>
-								<h6>${el.price}</h6>
-								<button>
+								<h6>${apiProduct.price}</h6>
+
+								<button
+									id={apiProduct.id}
+									onClick={() => addBaskethandler(apiProduct)}
+								>
 									<MdAddShoppingCart
 										color='white'
 										fontSize='25px'

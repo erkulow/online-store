@@ -1,19 +1,24 @@
 import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+//Import Store
+import { getAsyncProducts } from '../../store/productSlice'
+//import IMG
 import Logo from '../../assets/img/Logo.png'
+//Import Components
 import { Header } from '../../components/header/Header'
 import { SearchBar } from '../../components/Layout/SearchBar'
 import { NavigateLink } from '../../components/Layout/NavigateLink'
-import { StockBlock } from './Layout/StockBlock'
 import { BanerImg1, BanerImg2 } from '../../components/UI/Baner'
-import { Trending } from './Layout/Trending'
-import { Advertising } from './Layout/Advertising'
 import { Footer } from '../../components/footer/Footer'
-import { useDispatch } from 'react-redux'
-import { getAsyncProducts } from '../../store/productSlice'
+import { ScrollTop } from '../../components/Layout/ScrollTop'
+//Import Layout Components
+import { StockBlock } from './Layout/StockBlock'
+import { Trending } from '../../components/Layout/Trending'
+import { Advertising } from './Layout/Advertising'
 import { OurProduct } from './Layout/OurProduct'
+// --------------------------------------------------
 const Home = () => {
 	const dispatch = useDispatch()
-
 	useEffect(() => {
 		dispatch(getAsyncProducts())
 	}, [])
@@ -23,6 +28,7 @@ const Home = () => {
 	return (
 		<>
 			<Header />
+			<ScrollTop />
 			<SearchBar />
 			<NavigateLink logoImgAdvertising={logoImgAdvertising} />
 			<Trending />
@@ -35,4 +41,5 @@ const Home = () => {
 		</>
 	)
 }
+
 export default Home

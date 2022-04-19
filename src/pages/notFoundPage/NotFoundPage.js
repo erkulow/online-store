@@ -1,7 +1,7 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
-import { useNavigate } from 'react-router-dom'
 const GlobalStyle = createGlobalStyle`
     body{
         background: black;
@@ -194,7 +194,6 @@ const NotFoundPage = () => {
 					/>
 				</g>
 			</svg>
-
 			<div onClick={() => navigate('/')} className='message'>
 				Page not found Please Go Back
 			</div>

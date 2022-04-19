@@ -2,22 +2,24 @@ import { SERVER_BASE_URL } from '../utils/constants/general'
 
 export const appFetch = async (options) => {
 	try {
-		let path = options.path
+		let { path, body, method, params } = options
 
 		const requestOptions = {
-			method: options.method || 'GET',
+			method: method || 'GET',
 			headers: { 'Content-Type': 'application/json' },
 		}
 
-		if (options.method !== 'GET') {
-			requestOptions.body = JSON.stringify(options.body || {})
+		if (method !== 'GET') {
+			requestOptions.body = JSON.stringify(body || {})
 		}
 
-		if (options.params) {
+		if (params) {
 			// params  = {limit = 5 , page: 1, name: 't-shirt'}
 			// [limit=5, page:1]
 			// products?limit=5&page=1&name=t-shirt
-			const queryParamsStringValue = Object.keys(options.params).map(paramKey => `${paramKey}=${options.params[paramKey]}`).join('&')
+			const queryParamsStringValue = Object.keys(params)
+				.map((paramKey) => `${paramKey}=${params[paramKey]}`)
+				.join('&')
 			path = `${path}?${queryParamsStringValue}`
 		}
 
@@ -29,7 +31,6 @@ export const appFetch = async (options) => {
 		if (!response.ok) {
 			throw new Error('Some thing went wrong')
 		}
-
 
 		return response.json()
 	} catch (e) {

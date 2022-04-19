@@ -15,6 +15,9 @@ const WrapperForHeader = styled.div`
 	width: 100%;
 	background: ${(props) => props.backColor || '#7ac751'};
 	height: auto;
+	position: fixed;
+	z-index: 999;
+	top: 0;
 `
 const Container = styled.header`
 	width: 1200px;

@@ -6,6 +6,7 @@ import { RatingStars } from '../UI/RatingStars'
 
 export const ProductCard = ({ product }) => {
 	console.log(product)
+
 	return (
 		<Wrapper key={product.id}>
 			<CoverImg>
@@ -15,7 +16,7 @@ export const ProductCard = ({ product }) => {
 				<TitleItem>{product.title}</TitleItem>
 				<div>
 					<h6>${product.price}</h6>
-					<RatingStars rating={product.rating.rate} />
+					<RatingStars />
 					<button>
 						<MdAddShoppingCart color='white' fontSize='25px' />
 					</button>
