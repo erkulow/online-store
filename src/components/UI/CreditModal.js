@@ -8,15 +8,16 @@ import { Backdrop } from './Backdrop'
 // Custom Hook
 import { useInput } from '../../hooks/useInput'
 import { useToggle } from '../../hooks/useToggle'
+import { useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 export const CreditModal = () => {
 	const [hideModal, toggleHideModal] = useToggle(false)
-
+	const navigate = useNavigate()
 	const name = useInput('')
 	const numberCard = useInput('')
 	const dateCard = useInput('')
 	const securityCode = useInput('')
-
 	return ReactDOM.createPortal(
 		<>
 			{hideModal ? (
@@ -104,7 +105,14 @@ export const CreditModal = () => {
 									</FlexDiv>
 								</SecretCodeFlex>
 								<FlexDiv>
-									<button>PAY</button>
+									<LinkToHome
+										onClick={() => {
+											alert('Wait for your order')
+											navigate('/')
+										}}
+									>
+										PAY
+									</LinkToHome>
 								</FlexDiv>
 							</CreditCardForm>
 						</Container>
@@ -134,7 +142,7 @@ const Wrapper = styled.div`
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	z-index: 200;
+	z-index: 980;
 `
 const Container = styled.div`
 	display: flex;
@@ -160,24 +168,6 @@ const FlexDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	margin-top: 5px;
-	button {
-		margin-top: 5px;
-		padding: 15px 0;
-		background: #0099ff;
-		border: none;
-		border-radius: 4px;
-		color: #dcdcdc;
-		font-family: 'Mulish';
-		font-style: normal;
-		font-weight: 700;
-		font-size: 20px;
-		line-height: 20px;
-		cursor: pointer;
-		&:hover {
-			color: #fff;
-			opacity: 0.9;
-		}
-	}
 	label {
 		font-family: 'Rubik';
 		font-style: normal;
@@ -207,6 +197,24 @@ const FlexDiv = styled.div`
 	input[type='number']::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
+	}
+`
+const LinkToHome = styled(NavLink)`
+	margin-top: 5px;
+	padding: 15px 0;
+	background: #0099ff;
+	border: none;
+	border-radius: 4px;
+	color: #dcdcdc;
+	font-family: 'Mulish';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 20px;
+	cursor: pointer;
+	&:hover {
+		color: #fff;
+		opacity: 0.9;
 	}
 `
 const SecretCodeFlex = styled.div`

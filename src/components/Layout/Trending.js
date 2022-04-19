@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 //Import IMG
-import card1 from '../../../assets/img/card1.png'
-import card2 from '../../../assets/img/card2.png'
-import card3 from '../../../assets/img/card3.png'
-import card4 from '../../../assets/img/card4.png'
+import card1 from '../../assets/img/card1.png'
+import card2 from '../../assets/img/card2.png'
+import card3 from '../../assets/img/card3.png'
+import card4 from '../../assets/img/card4.png'
 //Import Components
-import { Title } from '../../../components/UI/Title'
-import { TitleItem } from '../../../components/UI/TitleItem'
+import { Title } from '../UI/Title'
+import { TitleItem } from '../UI/TitleItem'
 //Import Icons
 import { MdAddShoppingCart } from 'react-icons/md'
 //-------------------------

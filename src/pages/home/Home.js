@@ -13,7 +13,7 @@ import { Footer } from '../../components/footer/Footer'
 import { ScrollTop } from '../../components/Layout/ScrollTop'
 //Import Layout Components
 import { StockBlock } from './Layout/StockBlock'
-import { Trending } from './Layout/Trending'
+import { Trending } from '../../components/Layout/Trending'
 import { Advertising } from './Layout/Advertising'
 import { OurProduct } from './Layout/OurProduct'
 // --------------------------------------------------

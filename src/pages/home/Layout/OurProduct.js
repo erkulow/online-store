@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Title from '../../../components/UI/Title'
@@ -8,14 +8,10 @@ import { productActions } from '../../../store/productSlice'
 
 export const OurProduct = () => {
 	const dispatch = useDispatch()
-	const { products,basket } = useSelector((state) => state.product)
-	const addBaskethandler = (id) => {
-		dispatch(productActions.addToBasket(id))
+	const { products } = useSelector((state) => state.product)
+	const addBaskethandler = (item) => {
+		dispatch(productActions.addToBasket(item))
 	}
-	useEffect(() => {
-		localStorage.setItem('basket', JSON.stringify(basket))
-	}, [basket])
-
 	return (
 		<Wrapper>
 			<Title>Our Product</Title>
@@ -32,9 +28,7 @@ export const OurProduct = () => {
 
 								<button
 									id={apiProduct.id}
-									onClick={() =>
-										addBaskethandler(apiProduct.id)
-									}
+									onClick={() => addBaskethandler(apiProduct)}
 								>
 									<MdAddShoppingCart
 										color='white'

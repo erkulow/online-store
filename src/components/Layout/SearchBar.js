@@ -7,9 +7,7 @@ import { useSelector } from 'react-redux'
 
 export const SearchBar = () => {
 	const { products } = useSelector((state) => state.product)
-
 	const [filteredProducts, setFilteredProducts] = useState(products)
-
 	const filteredHandler = (event) => {
 		let filter = products.filter((product) =>
 			product.title.includes(event.target.value),
@@ -17,7 +15,6 @@ export const SearchBar = () => {
 		setFilteredProducts(filter)
 		console.log(filteredProducts)
 	}
-
 	return (
 		<StyledSearchBlock>
 			<Logo>
@@ -43,6 +40,7 @@ const StyledSearchBlock = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 21px;
+	margin-top: 55px;
 `
 const Logo = styled.div`
 	display: flex;

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 //import IMG
 import Logo from '../../assets/img/Logo.png'
-import card1 from '../../assets/img/card1.png'
 //Import Components
 import { ListItem } from '../../components/UI/ListItem'
 import { CreditModal } from '../../components/UI/CreditModal'
@@ -21,33 +20,51 @@ import { useToggle } from '../../hooks/useToggle'
 //Import Icons
 import { GiShoppingCart } from 'react-icons/gi'
 import { AiOutlineDelete } from 'react-icons/ai'
-import { TiDeleteOutline } from 'react-icons/ti'
 import { IoIosArrowDroprightCircle } from 'react-icons/io'
 import { FaOpencart } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { productActions } from '../../store/productSlice'
+import { Trending } from '../../components/Layout/Trending'
 
 const Busket = () => {
 	const dispatch = useDispatch()
 	const { basket } = useSelector((state) => state.product)
 	const [showModal, toggleShowModal] = useToggle(false)
-	// const [basketShow, setBasketShow] = useToggle(false)
+	const [totalPrice, setTotalPrice] = useState(0)
 	const logoImgAdvertising = (
 		<img style={{ width: '250px' }} src={Logo} alt='' />
 	)
 	useEffect(() => {
-		const saved = JSON.parse(localStorage.getItem('basket'))
-		dispatch(productActions.getItemLocalStorage(saved))
-		console.log(saved)
-	}, [])
-	console.log(basket)
-
+		window.onbeforeunload = () => {
+			return localStorage.setItem('basket', JSON.stringify(basket))
+		}
+		return () => localStorage.setItem('basket', JSON.stringify(basket))
+	}, [basket])
+	const deleteBasketHandler = (item) => {
+		dispatch(productActions.deleteCardHandler(item))
+	}
+	const calculateTotalPrice = useCallback(() => {
+		if (basket.length > 0) {
+			const total = basket.reduce((acc, current) => {
+				return acc + current.totalProductPrice
+			}, 0)
+			setTotalPrice(total)
+		} else {
+			setTotalPrice(0)
+		}
+	}, [basket])
+	useEffect(() => {
+		calculateTotalPrice()
+	}, [calculateTotalPrice])
 	return (
 		<>
 			<Header />
 			<ScrollTop />
 			<SearchBar />
 			<NavigateLink logoImgAdvertising={logoImgAdvertising} />
+			{basket.length < 1 && (
+				<h1 style={{ textAlign: 'center' }}>Basket is Empty</h1>
+			)}
 			{basket.map((productInCart) => (
 				<WrapperDesk key={productInCart.id}>
 					<DeskHeader>
@@ -57,7 +74,14 @@ const Busket = () => {
 						</FlexDiv>
 						<FlexDiv className='deleteBtn'>
 							<TitleItem>Delete everything</TitleItem>
-							<AiOutlineDelete fontSize='30' color='#5c5252' />
+							<AiOutlineDelete
+								id={productInCart.id}
+								onClick={() =>
+									deleteBasketHandler(productInCart)
+								}
+								fontSize='30'
+								color='#5c5252'
+							/>
 						</FlexDiv>
 					</DeskHeader>
 					<Main>
@@ -66,16 +90,45 @@ const Busket = () => {
 								<img src={productInCart.image} alt='' />
 								<div>
 									<ListItem>{productInCart.title}</ListItem>
-									<Text>{productInCart.categorie}</Text>
+									<Text>{productInCart.category}</Text>
+									<AmountProductsDiv>
+										Count : {productInCart.rating.count}
+									</AmountProductsDiv>
 								</div>
 							</AboutFood>
 							<WrapperCounter>
 								<p>$ {productInCart.price}</p>
-								<AmountProductsDiv>x2</AmountProductsDiv>
-								<TiDeleteOutline
-									cursor='pointer'
-									fontSize='35px'
-								/>
+								<FlexAmountDiv>
+									<button
+										onClick={() =>
+											dispatch(
+												productActions.removeProductFromBasket(
+													productInCart.id,
+												),
+											)
+										}
+									>
+										-
+									</button>
+									<TitleItem>
+										{productInCart.amount}
+									</TitleItem>
+									<button
+										onClick={() =>
+											dispatch(
+												productActions.addToBasket(
+													productInCart,
+												),
+											)
+										}
+										disabled={
+											productInCart.amount ===
+											productInCart.rating.count
+										}
+									>
+										+
+									</button>
+								</FlexAmountDiv>
 							</WrapperCounter>
 						</OrderCard>
 					</Main>
@@ -91,22 +144,61 @@ const Busket = () => {
 							<ListItem>Promo-Code</ListItem>
 						</WrapperPromo>
 						<WrapperTotal>
-							<TitleItem>Total:</TitleItem>
-							<TitleItem> $ {productInCart.price}</TitleItem>
-							<ButtonCheckout onClick={toggleShowModal}>
-								Checkout Order <FaOpencart fontSize='20px' />
-							</ButtonCheckout>
+							<TitleItem>
+								{productInCart.category} price : &nbsp;
+							</TitleItem>{' '}
+							<TitleItem>
+								{' '}
+								$ {productInCart.totalProductPrice.toFixed(2)}
+							</TitleItem>
 							{showModal ? <CreditModal /> : ''}
 						</WrapperTotal>
 					</DeskFooter>
 				</WrapperDesk>
 			))}
+			<TotalBlock>
+				<TitleItem>Total: ${totalPrice.toFixed(2)}</TitleItem>
+				<ButtonCheckout onClick={toggleShowModal}>
+					Checkout Order <FaOpencart fontSize='20px' />
+				</ButtonCheckout>
+			</TotalBlock>
 			<StockBlock />
+			<Trending />
 			<Advertising />
 			<Footer />
 		</>
 	)
 }
+const FlexAmountDiv = styled.div`
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	button {
+		width: 20px;
+		font-family: 'Rubik', sans-serif;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 15px;
+		color: #fff;
+		border-radius: 4px;
+		background: #7ac751;
+		border: none;
+		cursor: pointer;
+		&:hover {
+			opacity: 0.9;
+		}
+	}
+`
+const TotalBlock = styled.div`
+	margin: 0 auto;
+	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	p {
+		margin: 0 auto;
+	}
+`
 const WrapperDesk = styled.div`
 	width: 1100px;
 	padding: 5px 10px;
@@ -150,10 +242,13 @@ const AboutFood = styled.div`
 	}
 `
 const AmountProductsDiv = styled.div`
+	width: 100px;
+	text-align: center;
 	border: 1px solid #555555;
 	border-radius: 4px;
 	padding: 5px;
-	margin-right: 5px;
+	margin-top: 5px;
+	/* margin-right: 5px; */
 	font-family: 'Rubik', sans-serif;
 	font-style: normal;
 	font-weight: 400;
@@ -171,7 +266,6 @@ const WrapperCounter = styled.div`
 		font-weight: 400;
 		font-size: 17px;
 		line-height: 17px;
-		margin-right: 20px;
 		color: #7ac751;
 	}
 `
@@ -212,24 +306,30 @@ const WrapperInput = styled.div`
 `
 const ButtonCheckout = styled.button`
 	display: flex;
-	width: 130px;
 	justify-content: center;
 	align-items: center;
-	padding: 8px 3px;
-	margin-left: 10px;
+	width: 170px;
+	margin: 0 auto;
+	height: 50px;
+	margin-top: 15px;
 	border-radius: 4px;
 	border: none;
 	background: #7ac751;
 	font-family: 'Rubik', sans-serif;
 	font-style: normal;
 	font-weight: 400;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 120%;
 	letter-spacing: 0.005em;
 	color: #fff;
 	cursor: pointer;
+	transition: 1s;
 	&:hover {
 		opacity: 0.9;
+		width: 190px;
+		margin: 0 auto;
+		margin-top: 15px;
+		transition: 1s;
 	}
 `
 

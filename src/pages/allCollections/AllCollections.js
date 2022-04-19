@@ -16,7 +16,7 @@ import { Products } from './Layout/Products'
 import { ScrollTop } from '../../components/Layout/ScrollTop'
 import { ContentBaner } from '../home/Layout/ContentBaner'
 import { StockBlock } from '../home/Layout/StockBlock'
-import { Trending } from '../home/Layout/Trending'
+import { Trending } from '../../components/Layout/Trending'
 import { Advertising } from '../home/Layout/Advertising'
 //Import Icons
 import { AiOutlineAlignRight } from 'react-icons/ai'

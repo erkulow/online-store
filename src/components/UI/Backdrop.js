@@ -12,5 +12,5 @@ const Back = styled.div`
 	bottom: 0px;
 	left: 0px;
 	background: rgba(0, 0, 0, 0.8);
-	z-index: ${(props) => props.zIndex || '50'};
+	z-index: ${(props) => props.zIndex || '100'};
 `
