@@ -140,12 +140,12 @@ const Busket = () => {
                         {' '}
                         $ {productInCart.totalProductPrice.toFixed(2)}
                      </TitleItem>
-                     {showModal ? <CreditModal /> : ''}
                   </WrapperTotal>
                </DeskFooter>
             </WrapperDesk>
          ))}
          <TotalBlock>
+            {showModal ? <CreditModal /> : ''}
             <TitleItem>Total: ${totalPrice.toFixed(2)}</TitleItem>
             <ButtonCheckout onClick={toggleShowModal}>
                Checkout Order <FaOpencart fontSize="20px" />
@@ -212,7 +212,6 @@ const DeskHeader = styled.div`
    display: flex;
    justify-content: space-between;
 `
-// Main
 const Main = styled.div``
 const OrderCard = styled.div`
    display: flex;
@@ -237,7 +236,6 @@ const AmountProductsDiv = styled.div`
    border-radius: 4px;
    padding: 5px;
    margin-top: 5px;
-   /* margin-right: 5px; */
    font-family: 'Rubik', sans-serif;
    font-style: normal;
    font-weight: 400;
@@ -258,7 +256,6 @@ const WrapperCounter = styled.div`
       color: #7ac751;
    }
 `
-// Footer
 const DeskFooter = styled.div`
    display: flex;
    justify-content: space-between;

@@ -1,19 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const Pagination = ({ onPageChange }) => {
-   const pages = [1, 2, 3, 4]
-   const pageChangeHandler = (page) => {
-      onPageChange(page)
+export const Pagination = ({
+   productsPerPage,
+   totalProducts,
+   onPageChange,
+}) => {
+   const pageNumbers = []
+   for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
+      pageNumbers.push(i)
    }
    return (
       <Container>
-         {pages.map((page) => (
+         {pageNumbers.map((numberPage) => (
             <PageItem
-               key={Math.random()}
-               onClick={() => pageChangeHandler(page)}
+               onClick={() => {
+                  onPageChange(numberPage)
+               }}
+               key={numberPage}
             >
-               {page}
+               {numberPage}
             </PageItem>
          ))}
       </Container>
@@ -21,6 +27,9 @@ export const Pagination = ({ onPageChange }) => {
 }
 const Container = styled.div`
    display: flex;
+   width: 250px;
+   margin: 0 auto;
+   margin-top: 75px;
 `
 const PageItem = styled.div`
    width: 30px;
@@ -32,4 +41,9 @@ const PageItem = styled.div`
    align-items: center;
    justify-content: center;
    margin-right: 10px;
+   margin: 0 auto;
+   margin-top: 15px;
+   &:hover {
+      background: gray;
+   }
 `

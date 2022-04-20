@@ -114,9 +114,7 @@ export const CreditModal = () => {
                            </FlexDiv>
                         </SecretCodeFlex>
                         <FlexDiv>
-                           <LinkToHome onClick={finishShopingHandker}>
-                              PAY
-                           </LinkToHome>
+                           <button onClick={finishShopingHandker}>PAY</button>
                         </FlexDiv>
                      </CreditCardForm>
                   </Container>
@@ -172,6 +170,24 @@ const FlexDiv = styled.div`
    display: flex;
    flex-direction: column;
    margin-top: 5px;
+   button {
+      margin-top: 5px;
+      padding: 15px 0;
+      background: #0099ff;
+      border: none;
+      border-radius: 4px;
+      color: #dcdcdc;
+      font-family: 'Mulish';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 20px;
+      cursor: pointer;
+      &:hover {
+         color: #fff;
+         opacity: 0.9;
+      }
+   }
    label {
       font-family: 'Rubik';
       font-style: normal;
@@ -201,24 +217,6 @@ const FlexDiv = styled.div`
    input[type='number']::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
-   }
-`
-const LinkToHome = styled(NavLink)`
-   margin-top: 5px;
-   padding: 15px 0;
-   background: #0099ff;
-   border: none;
-   border-radius: 4px;
-   color: #dcdcdc;
-   font-family: 'Mulish';
-   font-style: normal;
-   font-weight: 700;
-   font-size: 20px;
-   line-height: 20px;
-   cursor: pointer;
-   &:hover {
-      color: #fff;
-      opacity: 0.9;
    }
 `
 const SecretCodeFlex = styled.div`

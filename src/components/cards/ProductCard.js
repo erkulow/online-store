@@ -1,23 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 import { TitleItem } from '../UI/TitleItem'
-import { MdAddShoppingCart } from 'react-icons/md'
 import { RatingStars } from '../UI/RatingStars'
 
-export const ProductCard = ({ product }) => {
+export const ProductCard = ({ currentProduct }) => {
    return (
-      <Wrapper key={product.id}>
+      <Wrapper key={currentProduct.id}>
          <CoverImg>
-            <img src={product.image} alt="" />
+            <img src={currentProduct.image} alt="" />
          </CoverImg>
          <WrapperInfo>
-            <TitleItem>{product.title}</TitleItem>
+            <TitleItem>{currentProduct.title}</TitleItem>
             <div>
-               <h6>${product.price}</h6>
+               <h6>${currentProduct.price}</h6>
                <RatingStars />
-               <button>
-                  <MdAddShoppingCart color="white" fontSize="25px" />
-               </button>
             </div>
          </WrapperInfo>
       </Wrapper>

@@ -1,7 +1,8 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react'
 import { AiOutlineAlignRight } from 'react-icons/ai'
 import styled from 'styled-components'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import { getAsyncProducts } from '../../store/productSlice'
 import { Header } from '../../components/header/Header'
@@ -20,16 +21,31 @@ import { Advertising } from '../home/Layout/Advertising'
 const Blog = () => {
    const dispatch = useDispatch()
    const [searchParams, setSearchParams] = useSearchParams()
+   const { products } = useSelector((state) => state.product)
+
    const allcollections = (
       <AllCollectionBlock>
          <AiOutlineAlignRight color="white" fontSize="20px" />
          <p>ALL COLLECTIONS</p>
       </AllCollectionBlock>
    )
-   const pageChangeHandler = (selectedPage) => {
-      setSearchParams({ page: selectedPage })
-      dispatch(getAsyncProducts(selectedPage))
+
+   const [currentPage, setCurrentPage] = useState(1)
+   const [productsPerPage, setProductsPage] = useState(4)
+   const pageChangeHandler = (numberPage) => {
+      setSearchParams({ page: numberPage })
+      dispatch(getAsyncProducts(numberPage))
+      setCurrentPage(numberPage)
    }
+   const indexOfLastProduct = currentPage * productsPerPage
+   const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+   const currentProduct = products.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+   )
+   useEffect(() => {
+      dispatch(getAsyncProducts())
+   }, [])
 
    return (
       <>
@@ -42,10 +58,14 @@ const Blog = () => {
          <Trending />
          <Advertising />
          <BanerImg1 />
-         <Products />
          <PaginationContainer>
-            <Pagination onPageChange={pageChangeHandler} />
+            <Products currentProduct={currentProduct} />
          </PaginationContainer>
+         <Pagination
+            productsPerPage={productsPerPage}
+            totalProducts={products.length}
+            onPageChange={pageChangeHandler}
+         />
          <Footer />
       </>
    )
@@ -69,7 +89,11 @@ const AllCollectionBlock = styled.div`
    }
 `
 const PaginationContainer = styled.div`
+   width: 1200px;
+   margin: 0 auto;
    display: flex;
    justify-content: center;
+   align-items: center;
+   margin-bottom: 15px;
 `
 export default Blog
