@@ -1,6 +1,6 @@
 import React from 'react'
-import img2 from '../../assets/cor/img2.jpg'
-import img3 from '../../assets/cor/img3.jpg'
+import img2 from '../../assets/carousel/img2.jpg'
+import img3 from '../../assets/carousel/img3.jpg'
 import styled from 'styled-components'
 import Title from './Title'
 

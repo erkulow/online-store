@@ -1,23 +1,19 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { appFetch } from '../api/appFetch'
-
-// Get All Ptoducts
 export const getAsyncProducts = createAsyncThunk(
    'product/getAsyncProducts',
-   async (page) => {
+   async () => {
       try {
          return await appFetch({
             path: 'products',
             method: 'GET',
-            params: { limit: 100, page },
          })
       } catch (error) {
          return error.message
       }
    }
 )
-// Get Men`s-Clothing Ptoducts
 export const getMensClothingProduct = createAsyncThunk(
    'men`s-clothing/getMensClothingProduct',
    async () => {
@@ -31,7 +27,6 @@ export const getMensClothingProduct = createAsyncThunk(
       }
    }
 )
-// Get Jewelery Ptoducts
 export const getJeweleryProducts = createAsyncThunk(
    'jewelery/getJeweleryProducts',
    async () => {
@@ -45,7 +40,6 @@ export const getJeweleryProducts = createAsyncThunk(
       }
    }
 )
-// Get Electronics Ptoducts
 export const getElectronicsProducts = createAsyncThunk(
    'electronics/getElectronicsProducts',
    async () => {
@@ -59,7 +53,6 @@ export const getElectronicsProducts = createAsyncThunk(
       }
    }
 )
-// Get Women`s-Clothing Ptoducts
 export const getWomensClothingProduct = createAsyncThunk(
    'jewelery/getWomensClothingProduct',
    async () => {
@@ -153,9 +146,8 @@ const productSlice = createSlice({
       [getWomensClothingProduct.pending]: (state) => {
          state.isLoading = true
       },
-      // -----------------------------------------------------------------
-      [getAsyncProducts.fulfilled]: (state, { payload }) => {
-         state.products = payload
+      [getAsyncProducts.fulfilled]: (state, { payload: products }) => {
+         state.products = products
          state.status = 'Success'
          state.isLoading = false
       },
@@ -179,7 +171,6 @@ const productSlice = createSlice({
          state.products = payload
          state.isLoading = false
       },
-      // -----------------------------------------------------------------
       [getAsyncProducts.rejected]: (state) => {
          state.error = 'Error'
       },

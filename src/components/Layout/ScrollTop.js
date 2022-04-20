@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import upArrow from '../../assets/img/upArrow.png'
-
 export const ScrollTop = () => {
    const scrollBtn = document.getElementById('scrollBtn')
    window.addEventListener('scroll', () => {
@@ -21,7 +20,6 @@ export const ScrollTop = () => {
          behavior: 'smooth',
       })
    }
-
    return ReactDOM.createPortal(
       <Scroll id="scrollBtn" onClick={topHandler}>
          <img src={upArrow} alt="" />

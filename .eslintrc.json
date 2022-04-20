@@ -152,6 +152,7 @@
             "area": ["Area"],
             "input[type=\"image\"]": ["InputImage"]
          }
-      ]
+      ],
+      "no-plusplus": "off"
    }
 }
