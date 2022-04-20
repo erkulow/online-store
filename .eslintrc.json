@@ -1,0 +1,157 @@
+{
+   "env": {
+      "browser": true,
+      "es2021": true
+   },
+   "extends": [
+      "plugin:react/recommended",
+      "airbnb",
+      "plugin:prettier/recommended"
+   ],
+   "parserOptions": {
+      "ecmaFeatures": {
+         "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+   },
+   "plugins": ["react"],
+   "rules": {
+      "react/jsx-filename-extension": [
+         1,
+         {
+            "extensions": [".js", ".jsx"]
+         }
+      ],
+      "react/jsx-props-no-spreading": "off",
+      "react/react-in-jsx-scope": "off",
+      "import/prefer-default-export": "off",
+      "no-use-before-define": "off",
+      "no-shadow": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "react/function-component-definition": "off",
+      "max-len": [
+         "error",
+         {
+            "code": 100,
+            "ignoreStrings": true,
+            "ignoreTemplateLiterals": true,
+            "ignoreRegExpLiterals": true
+         }
+      ],
+      "no-console": ["warn", { "allow": ["warn", "error"] }],
+      "react-hooks/rules-of-hooks": "off",
+      "jsx-a11y/label-has-associated-control": [
+         "error",
+         {
+            "required": {
+               "some": ["nesting", "id"]
+            }
+         }
+      ],
+      "no-param-reassign": [
+         "error",
+         { "props": true, "ignorePropertyModificationsFor": ["state"] }
+      ],
+      "no-unused-vars": 1,
+      "react/destructuring-assignment": ["off"],
+      "react/button-has-type": ["off"],
+      "react/prop-types": ["off"],
+      "jsx-a11y/click-events-have-key-events": ["off"],
+      "jsx-a11y/no-static-element-interactions": [
+         "off",
+         {
+            "handlers": [
+               "onClick",
+               "onMouseDown",
+               "onMouseUp",
+               "onKeyPress",
+               "onKeyDown",
+               "onKeyUp"
+            ]
+         }
+      ],
+      "react/self-closing-comp": [
+         "off",
+         {
+            "component": true,
+            "html": true
+         }
+      ],
+      "import/no-named-as-default": "off",
+      "prettier/prettier": [
+         "off",
+         { "singleQuote": true, "parser": "flow" },
+         {
+            "fileInfoOptions": {
+               "withNodeModules": true
+            }
+         }
+      ],
+      "import/newline-after-import": ["off"],
+      "react/jsx-curly-brace-presence": [
+         "off",
+         { "props": "off", "children": "off", "propElementValues": "off" }
+      ],
+      "react/no-unescaped-entities": [
+         "error",
+         {
+            "forbid": [
+               {
+                  "char": ">",
+                  "alternatives": ["&gt;"]
+               },
+               {
+                  "char": "}",
+                  "alternatives": ["&#125;"]
+               }
+            ]
+         }
+      ],
+      "jsx-a11y/no-noninteractive-element-interactions": [
+         "off",
+         {
+            "handlers": [
+               "onClick",
+               "onMouseDown",
+               "onMouseUp",
+               "onKeyPress",
+               "onKeyDown",
+               "onKeyUp"
+            ]
+         }
+      ],
+      "react/jsx-fragments": ["off", "off"],
+      "import/no-useless-path-segments": [
+         "off",
+         {
+            "noUselessIndex": true
+         }
+      ],
+      "import/order": [
+         "off",
+         {
+            "groups": [
+               "index",
+               "sibling",
+               "parent",
+               "internal",
+               "external",
+               "builtin",
+               "object",
+               "type"
+            ]
+         }
+      ],
+      "jsx-a11y/alt-text": [
+         2,
+         {
+            "elements": ["img", "object", "area", "input[type=\"image\"]"],
+            "img": ["Image"],
+            "object": ["Object"],
+            "area": ["Area"],
+            "input[type=\"image\"]": ["InputImage"]
+         }
+      ]
+   }
+}
