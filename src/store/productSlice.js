@@ -90,6 +90,10 @@ const productSlice = createSlice({
                ...action.payload,
                amount: 1,
                totalProductPrice: action.payload.price,
+               rating: {
+                  ...action.payload.rating,
+                  count: action.payload.rating.count - 1,
+               },
             })
          } else {
             state.basket = state.basket.map((productskey) => {
@@ -97,27 +101,23 @@ const productSlice = createSlice({
                   productskey.amount = Number(productskey.amount) + 1
                   productskey.totalProductPrice =
                      productskey.price * productskey.amount
+                  productskey.rating.count -= 1
                }
                return productskey
             })
          }
       },
       removeProductFromBasket(state, { payload: id }) {
-         const productItem = state.basket.find((product) => product.id === id)
-         if (productItem.amount === 1) {
-            state.basket = state.basket.filter((product) => product.id !== id)
-         } else {
-            state.basket = state.basket.map((productskey) => {
-               if (productskey.id === id) {
-                  productskey.amount = Number(productskey.amount) - 1
-                  productskey.totalProductPrice =
-                     productskey.price * productskey.amount
-               }
-               return productskey
-            })
-         }
+         state.basket = state.basket.map((productskey) => {
+            if (productskey.id === id) {
+               productskey.amount = Number(productskey.amount) - 1
+               productskey.totalProductPrice =
+                  productskey.price * productskey.amount
+               productskey.rating.count += 1
+            }
+            return productskey
+         })
       },
-
       searchHandler(state, action) {
          state.products = action.payload
       },

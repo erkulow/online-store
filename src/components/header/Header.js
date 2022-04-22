@@ -2,8 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineBell } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export const Header = () => {
+   const novigate = useNavigate()
    const { basket } = useSelector((state) => state.product)
    const amountProductInBasket = basket.reduce(
       (acc, produsctAmount) => acc + produsctAmount.amount,
@@ -15,7 +17,7 @@ export const Header = () => {
             <p>Welcome to our online shop</p>
             <WrapperRightHeader>
                <p>English (USD) | Login or Sign up</p>
-               <WrapperBell>
+               <WrapperBell onClick={() => novigate('/basket')}>
                   {amountProductInBasket}
                   <AiOutlineBell className="iconBell" />
                </WrapperBell>
@@ -57,13 +59,17 @@ const WrapperBell = styled.div`
    margin-left: 10px;
    width: 55px;
    padding: 2px 0 2px 3px;
-   border: 3px solid #fff;
+   border: 3px double #fff;
    display: flex;
    align-items: center;
    justify-content: center;
    border-radius: 20px;
    color: #fff;
    font-size: 18px;
+   cursor: pointer;
+   &:hover {
+      border: 3px solid #fff;
+   }
    .iconBell {
       font-size: 23px;
    }

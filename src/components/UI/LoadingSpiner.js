@@ -14,6 +14,7 @@ export const LoadingSpiner = () => {
       </Middle>
    )
 }
+
 const Middle = styled.div`
    top: 50%;
    left: 50%;

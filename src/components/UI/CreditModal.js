@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
 import styled from 'styled-components'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import wave from '../../assets/svg/wave.svg'
 import { Text } from '../../components/UI/Text'
@@ -9,6 +9,7 @@ import { TitleItem } from '../../components/UI/TitleItem'
 import { Backdrop } from './Backdrop'
 import { useInput } from '../../hooks/useInput'
 import { useToggle } from '../../hooks/useToggle'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 export const CreditModal = () => {
    const [hideModal, toggleHideModal] = useToggle(false)
@@ -27,7 +28,16 @@ export const CreditModal = () => {
          ) : (
             <React.Fragment>
                <Wrapper>
-                  <H1>Payment Information</H1>
+                  <Flex>
+                     <H1>Payment Information</H1>{' '}
+                     <AiOutlineCloseCircle
+                        fontSize={'30px'}
+                        color="white"
+                        cursor="pointer"
+                        onClick={toggleHideModal}
+                     />
+                  </Flex>
+
                   <Container>
                      <Card>
                         <HeaderCard>
@@ -126,6 +136,13 @@ export const CreditModal = () => {
       document.getElementById('credit-modal')
    )
 }
+const Flex = styled.div`
+   margin: 0 auto;
+   width: 90%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+`
 const H1 = styled.h1`
    text-align: center;
    font-family: 'Mulish';

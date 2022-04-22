@@ -20,12 +20,14 @@ import { ScrollTop } from '../../components/Layout/ScrollTop'
 import { useToggle } from '../../hooks/useToggle'
 import { productActions } from '../../store/productSlice'
 import { Trending } from '../../components/Layout/Trending'
+import Title from '../../components/UI/Title'
 
 const Busket = () => {
    const dispatch = useDispatch()
    const { basket } = useSelector((state) => state.product)
    const [showModal, toggleShowModal] = useToggle(false)
    const [totalPrice, setTotalPrice] = useState(0)
+
    const logoImgAdvertising = (
       <img style={{ width: '250px' }} src={Logo} alt="" />
    )
@@ -51,6 +53,7 @@ const Busket = () => {
    useEffect(() => {
       calculateTotalPrice()
    }, [calculateTotalPrice])
+
    return (
       <>
          <Header />
@@ -58,7 +61,7 @@ const Busket = () => {
          <SearchBar />
          <NavigateLink logoImgAdvertising={logoImgAdvertising} />
          {basket.length < 1 && (
-            <h1 style={{ textAlign: 'center' }}>Basket is Empty</h1>
+            <Title style={{ textAlign: 'center' }}>Basket is Empty</Title>
          )}
          {basket.map((productInCart) => (
             <WrapperDesk key={productInCart.id}>
@@ -93,6 +96,7 @@ const Busket = () => {
                         <p>$ {productInCart.price}</p>
                         <FlexAmountDiv>
                            <button
+                              disabled={productInCart.amount === 1}
                               onClick={() =>
                                  dispatch(
                                     productActions.removeProductFromBasket(
@@ -122,16 +126,6 @@ const Busket = () => {
                   </OrderCard>
                </Main>
                <DeskFooter>
-                  <WrapperPromo>
-                     <WrapperInput>
-                        <input type="text" />
-                        <IoIosArrowDroprightCircle
-                           fontSize="30px"
-                           color="grey"
-                        />
-                     </WrapperInput>
-                     <ListItem>Promo-Code</ListItem>
-                  </WrapperPromo>
                   <WrapperTotal>
                      <TitleItem>
                         {productInCart.category} price : &nbsp;
@@ -144,13 +138,23 @@ const Busket = () => {
                </DeskFooter>
             </WrapperDesk>
          ))}
-         <TotalBlock>
-            {showModal ? <CreditModal /> : ''}
-            <TitleItem>Total: ${totalPrice.toFixed(2)}</TitleItem>
-            <ButtonCheckout onClick={toggleShowModal}>
-               Checkout Order <FaOpencart fontSize="20px" />
-            </ButtonCheckout>
-         </TotalBlock>
+         <WrapperTotalandPromo>
+            <WrapperPromo>
+               <ListItem>Promo-Code</ListItem>
+               <WrapperInput>
+                  <input type="text" />
+                  <IoIosArrowDroprightCircle fontSize="30px" color="grey" />
+               </WrapperInput>
+            </WrapperPromo>
+            <TotalBlock>
+               {showModal ? <CreditModal /> : ''}
+               <TitleItem>Total: ${totalPrice.toFixed(2)}</TitleItem>
+               <ButtonCheckout onClick={toggleShowModal}>
+                  Checkout Order <FaOpencart fontSize="20px" />
+               </ButtonCheckout>
+            </TotalBlock>
+         </WrapperTotalandPromo>
+
          <StockBlock />
          <Trending />
          <Advertising />
@@ -267,8 +271,19 @@ const WrapperTotal = styled.div`
    display: flex;
    align-items: center;
 `
+const WrapperTotalandPromo = styled.div`
+   margin: 0 auto;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 300px;
+`
 const WrapperPromo = styled.div`
    margin-left: 5px;
+   width: 250px;
+   margin: 0 auto;
+   margin-right: 5px;
+   margin-top: 75px;
 `
 const WrapperInput = styled.div`
    display: flex;
@@ -276,7 +291,7 @@ const WrapperInput = styled.div`
    border-radius: 22px;
    border: 2px solid grey;
    input {
-      width: 150px;
+      width: 210px;
       height: 30px;
       background: none;
       outline: none;
@@ -318,5 +333,4 @@ const ButtonCheckout = styled.button`
       transition: 1s;
    }
 `
-
 export default Busket
