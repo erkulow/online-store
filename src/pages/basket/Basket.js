@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { GiShoppingCart } from 'react-icons/gi'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { IoIosArrowDroprightCircle } from 'react-icons/io'
@@ -20,6 +20,7 @@ import { ScrollTop } from '../../components/Layout/ScrollTop'
 import { useToggle } from '../../hooks/useToggle'
 import { productActions } from '../../store/productSlice'
 import { Trending } from '../../components/Layout/Trending'
+import { PROMO_CODE } from '../../utils/constants/general'
 import Title from '../../components/UI/Title'
 
 const Busket = () => {
@@ -27,6 +28,20 @@ const Busket = () => {
    const { basket } = useSelector((state) => state.product)
    const [showModal, toggleShowModal] = useToggle(false)
    const [totalPrice, setTotalPrice] = useState(0)
+   const [isValidPromoCode, setIsValidPromoCode] = useState('')
+   const promoCode = useRef()
+
+   const promoCodeHandler = () => {
+      const promoCodeValue = promoCode.current
+      if (promoCodeValue.value === PROMO_CODE) {
+         const discount = (totalPrice * 20) / 100
+         const minusDiscountOfTotalPrice = totalPrice - discount
+         setTotalPrice(minusDiscountOfTotalPrice)
+         setIsValidPromoCode('Congratulations on your 20% discount')
+      } else {
+         setIsValidPromoCode('Incorrect promo code')
+      }
+   }
 
    const logoImgAdvertising = (
       <img style={{ width: '250px' }} src={Logo} alt="" />
@@ -140,10 +155,16 @@ const Busket = () => {
          ))}
          <WrapperTotalandPromo>
             <WrapperPromo>
-               <ListItem>Promo-Code</ListItem>
+               <ListItem>
+                  Promo-Code: <br /> {isValidPromoCode}
+               </ListItem>
                <WrapperInput>
-                  <input type="text" />
-                  <IoIosArrowDroprightCircle fontSize="30px" color="grey" />
+                  <input ref={promoCode} type="text" />
+                  <IoIosArrowDroprightCircle
+                     onClick={promoCodeHandler}
+                     fontSize="30px"
+                     color="grey"
+                  />
                </WrapperInput>
             </WrapperPromo>
             <TotalBlock>
@@ -283,7 +304,7 @@ const WrapperPromo = styled.div`
    width: 250px;
    margin: 0 auto;
    margin-right: 5px;
-   margin-top: 75px;
+   margin-top: 30px;
 `
 const WrapperInput = styled.div`
    display: flex;
