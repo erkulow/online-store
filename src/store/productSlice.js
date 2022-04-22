@@ -108,15 +108,15 @@ const productSlice = createSlice({
          }
       },
       removeProductFromBasket(state, { payload: id }) {
-         state.basket = state.basket.map((productskey) => {
-            if (productskey.id === id) {
-               productskey.amount = Number(productskey.amount) - 1
-               productskey.totalProductPrice =
-                  productskey.price * productskey.amount
-               productskey.rating.count += 1
-            }
-            return productskey
-         })
+            state.basket = state.basket.map((productskey) => {
+               if (productskey.id === id) {
+                  productskey.amount = Number(productskey.amount) - 1
+                  productskey.totalProductPrice =
+                     productskey.price * productskey.amount
+                     productskey.rating.count += 1
+               }
+               return productskey
+            })
       },
       searchHandler(state, action) {
          state.products = action.payload
