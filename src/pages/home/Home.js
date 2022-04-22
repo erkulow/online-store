@@ -12,6 +12,7 @@ import { StockBlock } from './Layout/StockBlock'
 import { Trending } from '../../components/Layout/Trending'
 import { Advertising } from './Layout/Advertising'
 import { OurProduct } from './Layout/OurProduct'
+import { ContentBaner } from './Layout/ContentBaner'
 const Home = () => {
    const dispatch = useDispatch()
    useEffect(() => {
@@ -26,12 +27,13 @@ const Home = () => {
          <ScrollTop />
          <SearchBar />
          <NavigateLink logoImgAdvertising={logoImgAdvertising} />
+         <ContentBaner />
+         <BanerImg1 />
          <Trending />
          <StockBlock />
-         <BanerImg1 />
-         <Advertising />
-         <OurProduct />
          <BanerImg2 />
+         <OurProduct />
+         <Advertising />
          <Footer />
       </>
    )

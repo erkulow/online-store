@@ -17,11 +17,14 @@ import { ContentBaner } from '../home/Layout/ContentBaner'
 import { StockBlock } from '../home/Layout/StockBlock'
 import { Trending } from '../../components/Layout/Trending'
 import { Advertising } from '../home/Layout/Advertising'
+import { OurProduct } from '../home/Layout/OurProduct'
+import { useToggle } from '../../hooks/useToggle'
 
 const Blog = () => {
    const dispatch = useDispatch()
    const [searchParams, setSearchParams] = useSearchParams()
    const { products } = useSelector((state) => state.product)
+   const [hideCotegory, toggleHideCotegory] = useToggle(false)
 
    const allcollections = (
       <AllCollectionBlock>
@@ -29,12 +32,11 @@ const Blog = () => {
          <p>ALL COLLECTIONS</p>
       </AllCollectionBlock>
    )
-
    const [currentPage, setCurrentPage] = useState(1)
    const [productsPerPage, setProductsPage] = useState(4)
    const pageChangeHandler = (numberPage) => {
       setSearchParams({ page: numberPage })
-      dispatch(getAsyncProducts(numberPage))
+      dispatch(getAsyncProducts())
       setCurrentPage(numberPage)
    }
    const indexOfLastProduct = currentPage * productsPerPage
@@ -53,11 +55,9 @@ const Blog = () => {
          <ScrollTop />
          <SearchBar />
          <NavigateLink allcollections={allcollections} />
-         <ContentBaner />
-         <StockBlock />
-         <Trending />
+         
+         <OurProduct />
          <Advertising />
-         <BanerImg1 />
          <PaginationContainer>
             <Products currentProduct={currentProduct} />
          </PaginationContainer>
@@ -66,6 +66,9 @@ const Blog = () => {
             totalProducts={products.length}
             onPageChange={pageChangeHandler}
          />
+         <Trending />
+         <BanerImg1 />
+         <Trending />
          <Footer />
       </>
    )
