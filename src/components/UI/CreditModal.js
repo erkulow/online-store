@@ -82,42 +82,38 @@ export const CreditModal = () => {
                         <FlexDiv>
                            <label>Name</label>
                            <input
-                              minLength="3"
-                              maxLength="20"
                               placeholder="Name..."
                               value={name.value}
-                              onChange={name.value}
+                              onChange={name.onChange}
                               {...name}
                               type="text"
                            />
                         </FlexDiv>
                         <FlexDiv>
-                           <label htmlFor="">Card Number</label>
+                           <label >Card Number</label>
                            <input
                               placeholder="XXXX XXXX XXXX XXXX"
                               value={numberCard.value}
-                              onChange={numberCard.value}
+                              onChange={numberCard.onChange}
                               type="number"
                               {...numberCard}
                            />
                         </FlexDiv>
                         <SecretCodeFlex>
                            <FlexDiv>
-                              <label htmlFor="">Expiration (mm/yy)</label>
+                              <label >Expiration (mm/yy)</label>
                               <input
-                                 maxLength="4"
                                  value={dateCard.value}
-                                 onChange={dateCard.value}
+                                 onChange={dateCard.onChange}
                                  type="number"
                                  {...dateCard}
                               />
                            </FlexDiv>
                            <FlexDiv>
-                              <label htmlFor="">Security Code</label>
+                              <label >Security Code</label>
                               <input
-                                 maxLength={'3'}
                                  value={securityCode.value}
-                                 onChange={securityCode.value}
+                                 onChange={securityCode.onChange}
                                  type="number"
                                  {...securityCode}
                               />

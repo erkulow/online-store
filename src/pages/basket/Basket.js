@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Logo from '../../assets/img/Logo.png'
 import { ListItem } from '../../components/UI/ListItem'
-import { CreditModal } from '../../components/UI/CreditModal'
 import { Text } from '../../components/UI/Text'
 import { TitleItem } from '../../components/UI/TitleItem'
 import { Header } from '../../components/header/Header'
@@ -22,6 +21,7 @@ import { productActions } from '../../store/productSlice'
 import { Trending } from '../../components/Layout/Trending'
 import { PROMO_CODE } from '../../utils/constants/general'
 import Title from '../../components/UI/Title'
+import { NewCredit } from '../../components/UI/NewCredit'
 
 const Busket = () => {
    const dispatch = useDispatch()
@@ -30,18 +30,6 @@ const Busket = () => {
    const [totalPrice, setTotalPrice] = useState(0)
    const [isValidPromoCode, setIsValidPromoCode] = useState('')
    const promoCode = useRef()
-
-   const promoCodeHandler = () => {
-      const promoCodeValue = promoCode.current
-      if (promoCodeValue.value === PROMO_CODE) {
-         const discount = (totalPrice * 20) / 100
-         const minusDiscountOfTotalPrice = totalPrice - discount
-         setTotalPrice(minusDiscountOfTotalPrice)
-         setIsValidPromoCode('Congratulations on your 20% discount')
-      } else {
-         setIsValidPromoCode('Incorrect promo code')
-      }
-   }
 
    const logoImgAdvertising = (
       <img style={{ width: '250px' }} src={Logo} alt="" />
@@ -68,6 +56,19 @@ const Busket = () => {
    useEffect(() => {
       calculateTotalPrice()
    }, [calculateTotalPrice])
+   const promoCodeHandler = () => {
+      const promoCodeValue = promoCode.current
+      if (promoCodeValue.value === PROMO_CODE) {
+         const discount = (totalPrice * 20) / 100
+         const minusDiscountOfTotalPrice = totalPrice - discount
+         setTotalPrice(minusDiscountOfTotalPrice)
+         setIsValidPromoCode('Congratulations on your 20% discount')
+      } else {
+         calculateTotalPrice()
+         promoCode.current.value = ''
+         setIsValidPromoCode('Invalid promo code')
+      }
+   }
 
    return (
       <>
@@ -168,7 +169,7 @@ const Busket = () => {
                </WrapperInput>
             </WrapperPromo>
             <TotalBlock>
-               {showModal ? <CreditModal /> : ''}
+               {showModal ? <NewCredit /> : ''}
                <TitleItem>Total: ${totalPrice.toFixed(2)}</TitleItem>
                <ButtonCheckout onClick={toggleShowModal}>
                   Checkout Order <FaOpencart fontSize="20px" />
