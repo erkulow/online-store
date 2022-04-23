@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import card1 from '../../assets/img/card1.png'
 import card2 from '../../assets/img/card2.png'
@@ -7,6 +7,8 @@ import card4 from '../../assets/img/card4.png'
 import { Title } from '../UI/Title'
 import { TitleItem } from '../UI/TitleItem'
 import { MdAddShoppingCart } from 'react-icons/md'
+import { AiOutlineSearch } from 'react-icons/ai'
+
 const DUMMY_MEALS = [
    {
       id: 1,
@@ -16,37 +18,37 @@ const DUMMY_MEALS = [
    },
    {
       id: 2,
-      title: 'Minimal LCD chair',
+      title: 'Wooden LCD chair',
       url: card2,
       price: '$180',
    },
    {
       id: 3,
-      title: 'Minimal LCD chair',
+      title: 'Oreng LCD chair',
       url: card3,
       price: '$180',
    },
    {
       id: 4,
-      title: 'Minimal LCD chair',
+      title: 'Fit LCD chair',
       url: card4,
       price: '$180',
    },
    {
       id: 5,
-      title: 'Minimal LCD chair',
+      title: 'Fit LCD chair',
       url: card4,
       price: '$180',
    },
    {
       id: 6,
-      title: 'Minimal LCD chair',
+      title: 'Oreng LCD chair',
       url: card3,
       price: '$180',
    },
    {
       id: 7,
-      title: 'Minimal LCD chair',
+      title: 'Wooden LCD chair',
       url: card2,
       price: '$180',
    },
@@ -58,28 +60,52 @@ const DUMMY_MEALS = [
    },
 ]
 export const Trending = () => {
+   const [filteredProducts, setFilteredProducts] = useState('')
+
+   const onChangeHandler = (event) => {
+      setFilteredProducts(event.target.value)
+   }
+   const filteredHandler = () => {
+      const filter = DUMMY_MEALS.filter((product) =>
+         product.title.toLowerCase().includes(filteredProducts.toLowerCase())
+      )
+      console.log(filter)
+   }
    return (
-      <Wrapper>
-         <Title>TRENDING</Title>
-         <WrapperCards>
-            {DUMMY_MEALS.map((product) => (
-               <WrapperCard key={product.id}>
-                  <CoverImg>
-                     <img src={product.url} alt="" />
-                  </CoverImg>
-                  <WrapperInfo>
-                     <TitleItem>{product.title}</TitleItem>
-                     <div>
-                        <h6>{product.price}</h6>
-                        <button>
-                           <MdAddShoppingCart color="white" fontSize="25px" />
-                        </button>
-                     </div>
-                  </WrapperInfo>
-               </WrapperCard>
-            ))}
-         </WrapperCards>
-      </Wrapper>
+      <>
+         <WrapperSearch>
+            <Search>
+               <input onChange={onChangeHandler} type="text" />
+               <button onClick={filteredHandler}>
+                  <AiOutlineSearch fontSize="30px" color="white" />
+               </button>
+            </Search>
+         </WrapperSearch>
+         <Wrapper>
+            <Title>TRENDING</Title>
+            <WrapperCards>
+               {DUMMY_MEALS.map((product) => (
+                  <WrapperCard key={product.id}>
+                     <CoverImg>
+                        <img src={product.url} alt="" />
+                     </CoverImg>
+                     <WrapperInfo>
+                        <TitleItem>{product.title}</TitleItem>
+                        <div>
+                           <h6>{product.price}</h6>
+                           <button>
+                              <MdAddShoppingCart
+                                 color="white"
+                                 fontSize="25px"
+                              />
+                           </button>
+                        </div>
+                     </WrapperInfo>
+                  </WrapperCard>
+               ))}
+            </WrapperCards>
+         </Wrapper>
+      </>
    )
 }
 const Wrapper = styled.div`
@@ -90,6 +116,7 @@ const Wrapper = styled.div`
    justify-content: center;
    margin-top: 100px;
 `
+
 const WrapperCards = styled.div`
    padding-top: 50px;
    display: grid;
@@ -157,6 +184,48 @@ const WrapperInfo = styled.div`
       cursor: pointer;
       &:hover {
          opacity: 0.9;
+      }
+   }
+`
+const WrapperSearch = styled.div`
+   width: 100%;
+   height: 75px;
+   background-color: #f7f8fa;
+   display: flex;
+   align-items: center;
+   margin-top: 50px;
+`
+const Search = styled.div`
+   width: 500px;
+   height: 45px;
+   border: 2px solid #7ac751;
+   border-radius: 8px;
+   display: flex;
+   justify-content: space-between;
+   padding: 0;
+   margin: 0 auto;
+   input {
+      width: 450px;
+      outline: none;
+      border: none;
+      border-radius: 8px;
+      padding: 0 10px;
+      font-size: 18px;
+   }
+   button {
+      width: 50px;
+      background: #7ac751;
+      border-radius: 0px 2px 2px 0px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      &:hover {
+         opacity: 0.9;
+      }
+      &:active {
+         opacity: 1;
       }
    }
 `

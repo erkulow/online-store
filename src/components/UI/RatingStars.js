@@ -6,7 +6,7 @@ export const RatingStars = () => {
    return (
       <WrapperStars>
          {rate.map((rate) => (
-            <AiFillStar key={Math.random()} color="grey" values={rate} />
+            <AiFillStar key={rate} color="gold" />
          ))}
       </WrapperStars>
    )
