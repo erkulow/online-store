@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import card1 from '../../assets/img/card1.png'
@@ -8,7 +9,6 @@ import { Title } from '../UI/Title'
 import { TitleItem } from '../UI/TitleItem'
 import { MdAddShoppingCart } from 'react-icons/md'
 import { AiOutlineSearch } from 'react-icons/ai'
-
 const DUMMY_MEALS = [
    {
       id: 1,
@@ -60,16 +60,16 @@ const DUMMY_MEALS = [
    },
 ]
 export const Trending = () => {
-   const [filteredProducts, setFilteredProducts] = useState('')
-
+   const [filterValue, setFilterValue] = useState('')
+   const [filteredData, setFilteredData] = useState(DUMMY_MEALS)
    const onChangeHandler = (event) => {
-      setFilteredProducts(event.target.value)
+      setFilterValue(event.target.value)
    }
    const filteredHandler = () => {
       const filter = DUMMY_MEALS.filter((product) =>
-         product.title.toLowerCase().includes(filteredProducts.toLowerCase())
+         product.title.toLowerCase().includes(filterValue.toLowerCase())
       )
-      console.log(filter)
+      setFilteredData(filter)
    }
    return (
       <>
@@ -82,9 +82,9 @@ export const Trending = () => {
             </Search>
          </WrapperSearch>
          <Wrapper>
-            <Title>TRENDING</Title>
+            {filteredData.length > 0 && <Title>TRENDING</Title>}
             <WrapperCards>
-               {DUMMY_MEALS.map((product) => (
+               {filteredData.map((product) => (
                   <WrapperCard key={product.id}>
                      <CoverImg>
                         <img src={product.url} alt="" />

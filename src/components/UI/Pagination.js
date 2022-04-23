@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
+import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Pagination = ({
@@ -6,6 +8,8 @@ export const Pagination = ({
    totalProducts,
    onPageChange,
 }) => {
+   const [searchParams, setSearchParams] = useSearchParams()
+   const pageNumber = searchParams.get('page')
    const pageNumbers = []
    for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
       pageNumbers.push(i)
@@ -18,6 +22,7 @@ export const Pagination = ({
                   onPageChange(numberPage)
                }}
                key={numberPage}
+               isActive={Number(numberPage) === Number(pageNumber)}
             >
                {numberPage}
             </PageItem>
@@ -37,7 +42,7 @@ const PageItem = styled.div`
    height: 30px;
    border-radius: 50%;
    border: 2px solid #7ac751;
-   background: #f7f8fa;
+   background: ${(props) => (props.isActive ? '#7ac751' : '#f7f8fa')};
    color: white;
    cursor: pointer;
    display: flex;
@@ -54,6 +59,6 @@ const PageItem = styled.div`
    font-weight: 400;
    font-size: 17px;
    line-height: 17px;
-   color: #7ac751;
+   color: black;
    margin: 0;
 `

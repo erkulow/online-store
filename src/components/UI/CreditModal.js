@@ -37,7 +37,6 @@ export const CreditModal = () => {
                         onClick={toggleHideModal}
                      />
                   </Flex>
-
                   <Container>
                      <Card>
                         <HeaderCard>
@@ -90,7 +89,7 @@ export const CreditModal = () => {
                            />
                         </FlexDiv>
                         <FlexDiv>
-                           <label >Card Number</label>
+                           <label>Card Number</label>
                            <input
                               placeholder="XXXX XXXX XXXX XXXX"
                               value={numberCard.value}
@@ -101,7 +100,7 @@ export const CreditModal = () => {
                         </FlexDiv>
                         <SecretCodeFlex>
                            <FlexDiv>
-                              <label >Expiration (mm/yy)</label>
+                              <label>Expiration (mm/yy)</label>
                               <input
                                  value={dateCard.value}
                                  onChange={dateCard.onChange}
@@ -110,7 +109,7 @@ export const CreditModal = () => {
                               />
                            </FlexDiv>
                            <FlexDiv>
-                              <label >Security Code</label>
+                              <label>Security Code</label>
                               <input
                                  value={securityCode.value}
                                  onChange={securityCode.onChange}

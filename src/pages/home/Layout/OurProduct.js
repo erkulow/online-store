@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MdAddShoppingCart } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -8,9 +8,16 @@ import { productActions } from '../../../store/productSlice'
 
 export const OurProduct = () => {
    const dispatch = useDispatch()
-   const { products } = useSelector((state) => state.product)
+   const [isHave, setIsHave] = useState(false)
+   const { products, basket } = useSelector((state) => state.product)
    const addBaskethandler = (item) => {
       dispatch(productActions.addToBasket(item))
+      const currontIndex = basket.some((el) => el.id === item.id)
+      if (currontIndex) {
+         setIsHave(true)
+      } else {
+         setIsHave(false)
+      }
    }
    return (
       <Wrapper>
