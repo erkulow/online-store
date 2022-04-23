@@ -13,19 +13,12 @@ import { BanerImg1 } from '../../components/UI/Baner'
 import { Pagination } from '../../components/UI/Pagination'
 import { Products } from './Layout/Products'
 import { ScrollTop } from '../../components/Layout/ScrollTop'
-import { ContentBaner } from '../home/Layout/ContentBaner'
-import { StockBlock } from '../home/Layout/StockBlock'
 import { Trending } from '../../components/Layout/Trending'
-import { Advertising } from '../home/Layout/Advertising'
-import { OurProduct } from '../home/Layout/OurProduct'
-import { useToggle } from '../../hooks/useToggle'
 
 const Blog = () => {
    const dispatch = useDispatch()
    const [searchParams, setSearchParams] = useSearchParams()
    const { products } = useSelector((state) => state.product)
-   const [hideCotegory, toggleHideCotegory] = useToggle(false)
-
    const allcollections = (
       <AllCollectionBlock>
          <AiOutlineAlignRight color="white" fontSize="20px" />
@@ -55,9 +48,6 @@ const Blog = () => {
          <ScrollTop />
          <SearchBar />
          <NavigateLink allcollections={allcollections} />
-         
-         <OurProduct />
-         <Advertising />
          <PaginationContainer>
             <Products currentProduct={currentProduct} />
          </PaginationContainer>
@@ -65,6 +55,7 @@ const Blog = () => {
             productsPerPage={productsPerPage}
             totalProducts={products.length}
             onPageChange={pageChangeHandler}
+            currentProduct={currentProduct}
          />
          <Trending />
          <BanerImg1 />
@@ -93,10 +84,11 @@ const AllCollectionBlock = styled.div`
 `
 const PaginationContainer = styled.div`
    width: 1200px;
+   height: 460px;
    margin: 0 auto;
    display: flex;
    justify-content: center;
    align-items: center;
-   margin-bottom: 15px;
+   margin-bottom: 20px;
 `
 export default Blog
