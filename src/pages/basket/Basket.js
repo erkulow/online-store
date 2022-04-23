@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { GiShoppingCart } from 'react-icons/gi'
 import { AiOutlineDelete } from 'react-icons/ai'
@@ -69,6 +70,13 @@ const Busket = () => {
          setIsValidPromoCode('Invalid promo code')
       }
    }
+   const buyProductHandler = () => {
+      if (basket.length < 1) {
+         alert('Order something, your basket is empty !')
+      } else {
+         toggleShowModal()
+      }
+   }
 
    return (
       <>
@@ -76,9 +84,12 @@ const Busket = () => {
          <ScrollTop />
          <SearchBar />
          <NavigateLink logoImgAdvertising={logoImgAdvertising} />
+         <br />
+         <br />
          {basket.length < 1 && (
             <Title style={{ textAlign: 'center' }}>Basket is Empty</Title>
          )}
+         <br />
          {basket.map((productInCart) => (
             <WrapperDesk key={productInCart.id}>
                <DeskHeader>
@@ -156,27 +167,28 @@ const Busket = () => {
          ))}
          <WrapperTotalandPromo>
             <WrapperPromo>
-               <ListItem>
-                  Promo-Code: <br /> {isValidPromoCode}
-               </ListItem>
+               <TitleItem>
+                  Promo-Code: <br />
+               </TitleItem>
                <WrapperInput>
                   <input ref={promoCode} type="text" />
                   <IoIosArrowDroprightCircle
                      onClick={promoCodeHandler}
                      fontSize="30px"
-                     color="grey"
+                     color="#7ac751"
+                     cursor="pointer"
                   />
                </WrapperInput>
+               <ListItem style={{ color: 'red' }}> {isValidPromoCode}</ListItem>
             </WrapperPromo>
             <TotalBlock>
                {showModal ? <NewCredit /> : ''}
                <TitleItem>Total: ${totalPrice.toFixed(2)}</TitleItem>
-               <ButtonCheckout onClick={toggleShowModal}>
+               <ButtonCheckout onClick={buyProductHandler}>
                   Checkout Order <FaOpencart fontSize="20px" />
                </ButtonCheckout>
             </TotalBlock>
          </WrapperTotalandPromo>
-
          <StockBlock />
          <Trending />
          <Advertising />
@@ -205,15 +217,7 @@ const FlexAmountDiv = styled.div`
       }
    }
 `
-const TotalBlock = styled.div`
-   margin: 0 auto;
-   margin-top: 50px;
-   display: flex;
-   flex-direction: column;
-   p {
-      margin: 0 auto;
-   }
-`
+
 const WrapperDesk = styled.div`
    width: 1100px;
    padding: 5px 10px;
@@ -296,22 +300,22 @@ const WrapperTotal = styled.div`
 const WrapperTotalandPromo = styled.div`
    margin: 0 auto;
    display: flex;
+   justify-content: space-around;
    align-items: center;
-   justify-content: center;
-   width: 300px;
+   background-color: #f7f8fa;
+   width: 1100px;
+   border-radius: 8px;
+   margin-top: 15px;
+   padding: 25px 0;
 `
-const WrapperPromo = styled.div`
-   margin-left: 5px;
-   width: 250px;
-   margin: 0 auto;
-   margin-right: 5px;
-   margin-top: 30px;
-`
+const TotalBlock = styled.div``
+const WrapperPromo = styled.div``
 const WrapperInput = styled.div`
    display: flex;
    padding: 2px 2px 2px 5px;
    border-radius: 22px;
-   border: 2px solid grey;
+   border: 2px solid #7ac751;
+   margin: 5px 0;
    input {
       width: 210px;
       height: 30px;
@@ -325,6 +329,7 @@ const WrapperInput = styled.div`
       line-height: 120%;
       letter-spacing: 0.005em;
       color: #555555;
+      padding: 0 0 0 5px;
    }
 `
 const ButtonCheckout = styled.button`
@@ -346,13 +351,8 @@ const ButtonCheckout = styled.button`
    letter-spacing: 0.005em;
    color: #fff;
    cursor: pointer;
-   transition: 1s;
    &:hover {
       opacity: 0.9;
-      width: 190px;
-      margin: 0 auto;
-      margin-top: 15px;
-      transition: 1s;
    }
 `
 export default Busket

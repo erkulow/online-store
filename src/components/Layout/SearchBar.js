@@ -1,26 +1,33 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { AiOutlineBell, AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
-import { useSelector } from 'react-redux'
+import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
+import { productActions } from '../../store/productSlice'
 
 export const SearchBar = () => {
+   const dispatch = useDispatch()
    const { products } = useSelector((state) => state.product)
-   const [filteredProducts, setFilteredProducts] = useState(products)
-   const filteredHandler = (event) => {
-      const filter = products.filter((product) =>
-         product.title.includes(event.target.value)
-      )
-      setFilteredProducts(filter)
+   const [filteredProducts, setFilteredProducts] = useState('')
+
+   const onChangeHandler = (event) => {
+      setFilteredProducts(event.target.value)
    }
+   const filteredHandler = () => {
+      const filter = products.filter((product) =>
+         product.title.toLowerCase().includes(filteredProducts.toLowerCase())
+      )
+      dispatch(productActions.filteredProcuct(filter))
+   }
+
    return (
       <StyledSearchBlock>
          <Logo>
             <p>FK</p>
          </Logo>
          <Search>
-            <input onChange={filteredHandler} type="text" />
-            <button>
+            <input onChange={onChangeHandler} type="text" />
+            <button onClick={filteredHandler}>
                <AiOutlineSearch fontSize="30px" color="white" />
             </button>
          </Search>
@@ -81,6 +88,13 @@ const Search = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      &:hover {
+         opacity: 0.9;
+      }
+      &:active {
+         opacity: 1;
+      }
    }
 `
 const Icons = styled.div`

@@ -29,10 +29,10 @@ const Home = () => {
          <NavigateLink logoImgAdvertising={logoImgAdvertising} />
          <ContentBaner />
          <BanerImg1 />
-         <Trending />
-         <StockBlock />
-         <BanerImg2 />
          <OurProduct />
+         <StockBlock />
+         <Trending />
+         <BanerImg2 />
          <Advertising />
          <Footer />
       </>

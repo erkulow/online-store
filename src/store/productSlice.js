@@ -69,6 +69,7 @@ export const getWomensClothingProduct = createAsyncThunk(
 
 const initState = {
    products: [],
+   filteredProducts: [],
    basket: localStorage.getItem('basket')
       ? JSON.parse(localStorage.getItem('basket'))
       : [],
@@ -108,15 +109,15 @@ const productSlice = createSlice({
          }
       },
       removeProductFromBasket(state, { payload: id }) {
-            state.basket = state.basket.map((productskey) => {
-               if (productskey.id === id) {
-                  productskey.amount = Number(productskey.amount) - 1
-                  productskey.totalProductPrice =
-                     productskey.price * productskey.amount
-                     productskey.rating.count += 1
-               }
-               return productskey
-            })
+         state.basket = state.basket.map((productskey) => {
+            if (productskey.id === id) {
+               productskey.amount = Number(productskey.amount) - 1
+               productskey.totalProductPrice =
+                  productskey.price * productskey.amount
+               productskey.rating.count += 1
+            }
+            return productskey
+         })
       },
       searchHandler(state, action) {
          state.products = action.payload
@@ -128,6 +129,9 @@ const productSlice = createSlice({
          state.basket = state.basket.filter(
             (product) => product.id !== action.payload.id
          )
+      },
+      filteredProcuct(state, action) {
+         state.filteredProducts = action.payload
       },
    },
    extraReducers: {

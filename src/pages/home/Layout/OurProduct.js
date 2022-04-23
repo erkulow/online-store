@@ -25,7 +25,7 @@ export const OurProduct = () => {
                      <TitleItem>{apiProduct.category}</TitleItem>
                      <div>
                         <h6>${apiProduct.price}</h6>
-
+                        {}
                         <button
                            id={apiProduct.id}
                            onClick={() => addBaskethandler(apiProduct)}
