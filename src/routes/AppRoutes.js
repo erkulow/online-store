@@ -12,6 +12,7 @@ const Contact = React.lazy(() => import('../pages/contacts/Contact'))
 const NotFoundPage = React.lazy(() =>
    import('../pages/notFoundPage/NotFoundPage')
 )
+const NewCredit = React.lazy(() => import('../pages/creditCardPage/NewCredit'))
 
 export const AppRoutes = () => {
    return (
@@ -25,6 +26,7 @@ export const AppRoutes = () => {
             <Route path={ROUTES.BASKET.path} element={<Basket />} />
             <Route path={ROUTES.ABOUT.path} element={<About />} />
             <Route path={ROUTES.CONTACT_US.path} element={<Contact />} />
+            <Route path={ROUTES.CREDIT_CARD.path} element={<NewCredit />} />
             <Route
                path={ROUTES.NOT_FOUND_PAGE.path}
                element={<NotFoundPage />}

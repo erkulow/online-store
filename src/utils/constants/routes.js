@@ -19,6 +19,9 @@ export const ROUTES = {
       path: '/contact-us',
       label: 'CONTACT US',
    },
+   CREDIT_CARD: {
+      path: '/credit',
+   },
    NOT_FOUND_PAGE: {
       path: '*',
    },
@@ -29,4 +32,5 @@ export const NOVIGATIONS_LINKS = [
    ROUTES.AllCOLLECTIONS,
    ROUTES.ABOUT,
    ROUTES.CONTACT_US,
+   ROUTES.CREDIT_CARD,
 ]

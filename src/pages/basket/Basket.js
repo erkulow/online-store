@@ -17,17 +17,16 @@ import { Footer } from '../../components/footer/Footer'
 import { StockBlock } from '../home/Layout/StockBlock'
 import { Advertising } from '../home/Layout/Advertising'
 import { ScrollTop } from '../../components/Layout/ScrollTop'
-import { useToggle } from '../../hooks/useToggle'
 import { productActions } from '../../store/productSlice'
 import { Trending } from '../../components/Layout/Trending'
 import { PROMO_CODE } from '../../utils/constants/general'
 import Title from '../../components/UI/Title'
-import { NewCredit } from '../../components/UI/NewCredit'
+import { useNavigate } from 'react-router-dom'
 
 const Busket = () => {
    const dispatch = useDispatch()
+   const navigate = useNavigate()
    const { basket } = useSelector((state) => state.product)
-   const [showModal, toggleShowModal] = useToggle(false)
    const [totalPrice, setTotalPrice] = useState(0)
    const [isValidPromoCode, setIsValidPromoCode] = useState('')
    const promoCode = useRef()
@@ -74,7 +73,7 @@ const Busket = () => {
       if (basket.length < 1) {
          alert('Order something, your basket is empty !')
       } else {
-         toggleShowModal()
+         navigate('/credit')
       }
    }
 
@@ -182,7 +181,6 @@ const Busket = () => {
                <ListItem style={{ color: 'red' }}> {isValidPromoCode}</ListItem>
             </WrapperPromo>
             <TotalBlock>
-               {showModal ? <NewCredit /> : ''}
                <TitleItem>Total: ${totalPrice.toFixed(2)}</TitleItem>
                <ButtonCheckout onClick={buyProductHandler}>
                   Checkout Order <FaOpencart fontSize="20px" />
