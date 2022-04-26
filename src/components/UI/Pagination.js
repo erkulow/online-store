@@ -14,11 +14,12 @@ export const Pagination = ({
    for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
       pageNumbers.push(i)
    }
+   const clickHandler = (e) => {}
    return (
       <Container>
          {pageNumbers.map((numberPage) => (
             <PageItem
-               onClick={() => {
+               onClick={(e) => {
                   onPageChange(numberPage)
                }}
                key={numberPage}

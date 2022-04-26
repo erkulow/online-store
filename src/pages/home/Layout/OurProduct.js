@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { MdAddShoppingCart } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'

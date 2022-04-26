@@ -133,6 +133,9 @@ const productSlice = createSlice({
       filteredProcuct(state, action) {
          state.filteredProducts = action.payload
       },
+      clearBasket(state) {
+         state.basket = []
+      },
    },
    extraReducers: {
       [getAsyncProducts.pending]: (state) => {
